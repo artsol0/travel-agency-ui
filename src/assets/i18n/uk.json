@@ -1,0 +1,17 @@
+{
+    "field": {
+        "username": "Ім'я користувача",
+        "password": "Пароль",
+        "confirmPassword": "Підтвердити пароль",
+        "email": "Поштова адреса",
+        "phoneNumber": "Номер телефону"
+    },
+    "motion": {
+        "login": "Увійти",
+        "signUp": "Зареєструватися"
+    },
+    "question": {
+        "notMember": "Ще не зареєстровані?",
+        "alreadyMember": "Вже зареєстровані?"
+    }
+}

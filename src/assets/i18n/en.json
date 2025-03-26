@@ -1,0 +1,17 @@
+{
+    "field": {
+        "username": "Username",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "email": "Email",
+        "phoneNumber": "Phone number"
+    },
+    "motion": {
+        "login": "Login",
+        "signUp": "Sign Up"
+    },
+    "question": {
+        "notMember": "Not a member?",
+        "alreadyMember": "Already a member?"
+    }
+}

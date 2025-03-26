@@ -10,6 +10,14 @@
           "style": "scss"
         }
       },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "uk": {
+            "translation": "src/assets/i18n/messages.uk.json"
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -73,7 +81,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "travel-agency-ui:build"
+            "buildTarget": "travel-agency-ui:build",
+            "format": "json",
+            "outputPath": "src/assets/i18n/"
           }
         },
         "test": {
