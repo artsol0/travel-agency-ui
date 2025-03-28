@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <div class="navbar-header d-flex">
+        <a style="cursor: pointer;" class="navbar-brand" (click)="vocuhers()">Travel Agency</a>
+        <select class="form-select" (change)="changeLang($event)" aria-label="Language selecting">
+            <option [selected]="lang==='en'" value="en">EN</option>
+            <option [selected]="lang==='uk'" value="uk">UK</option>
+        </select>
+      </div>
+  
+      <div id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a style="cursor: pointer;" class="nav-link" (click)="vocuhers()">{{ 'menu.vouchers' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a style="cursor: pointer;" class="nav-link">{{ 'menu.orders' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a style="cursor: pointer;" class="nav-link">{{ 'menu.profile' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a style="cursor: pointer;" class="nav-link" (click)="login()">{{ 'motion.login' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a style="cursor: pointer;" class="nav-link" (click)="register()">{{ 'motion.signUp' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-link nav-link" style="border: none; background: none;">{{ 'motion.logout' | translate }}</button>
+            </li>
+        </ul>
+      </div>
+    </div>
+</nav>

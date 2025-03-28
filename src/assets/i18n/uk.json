@@ -8,10 +8,43 @@
     },
     "motion": {
         "login": "Увійти",
-        "signUp": "Зареєструватися"
+        "signUp": "Зареєструватися",
+        "logout": "Вийти",
+        "update": "Оновити",
+        "create": "Створоти",
+        "delete": "Видалити",
+        "order": "Замовити",
+        "cancel": "Закрити",
+        "save": "Зберегти"
     },
     "question": {
         "notMember": "Ще не зареєстровані?",
         "alreadyMember": "Вже зареєстровані?"
+    },
+    "answer": {
+        "yes": "Так",
+        "no": "Ні"
+    },
+    "menu": {
+        "vouchers": "Ваучери",
+        "orders": "Замовлення",
+        "profile": "Профіль"
+    },
+    "voucher": {
+        "title": "Назва",
+        "description": "Опис",
+        "price": "Ціна",
+        "hotel": "Готель",
+        "transfer": "Трансфер",
+        "tour": "Тур",
+        "hot": "Гарячий",
+        "active": "Активний",
+        "arrivalDate": "Дата Виїзду",
+        "evictionDate": "Дата Повернення"
+    },
+    "navigation": {
+        "next": "Наступне",
+        "previous": "Попереднє",
+        "more": "Більше"
     }
 }

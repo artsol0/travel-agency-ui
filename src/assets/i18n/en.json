@@ -8,10 +8,43 @@
     },
     "motion": {
         "login": "Login",
-        "signUp": "Sign Up"
+        "signUp": "Sign Up",
+        "logout": "Logout",
+        "update": "Update",
+        "create": "Create",
+        "delete": "Delete",
+        "order": "Order",
+        "cancel": "Cancel",
+        "save": "Save"
     },
     "question": {
         "notMember": "Not a member?",
         "alreadyMember": "Already a member?"
+    },
+    "answer": {
+        "yes": "Yes",
+        "no": "No"
+    },
+    "menu": {
+        "vouchers": "Vouchers",
+        "orders": "Orders",
+        "profile": "Profile"
+    },
+    "voucher": {
+        "title": "Title",
+        "description": "Description",
+        "price": "Price",
+        "hotel": "Hotel",
+        "transfer": "Transfer",
+        "tour": "Tour",
+        "hot": "Hot",
+        "active": "Active",
+        "arrivalDate": "Arrival Date",
+        "evictionDate": "Eviction Date"
+    },
+    "navigation": {
+        "next": "Next",
+        "previous": "Previous",
+        "more": "More"
     }
 }

@@ -26,6 +26,8 @@ import { getAllVouchers } from '../fn/voucher/get-all-vouchers';
 import { GetAllVouchers$Params } from '../fn/voucher/get-all-vouchers';
 import { getAllVouchersPaged } from '../fn/voucher/get-all-vouchers-paged';
 import { GetAllVouchersPaged$Params } from '../fn/voucher/get-all-vouchers-paged';
+import { getVoucherById } from '../fn/voucher/get-voucher-by-id';
+import { GetVoucherById$Params } from '../fn/voucher/get-voucher-by-id';
 import { MessageResponse } from '../models/message-response';
 import { updateVoucherByVoucherId } from '../fn/voucher/update-voucher-by-voucher-id';
 import { UpdateVoucherByVoucherId$Params } from '../fn/voucher/update-voucher-by-voucher-id';
@@ -127,6 +129,31 @@ export class VoucherService extends BaseService {
    */
   changeVoucherHotStatusByVoucherId(params: ChangeVoucherHotStatusByVoucherId$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
     return this.changeVoucherHotStatusByVoucherId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getVoucherById()` */
+  static readonly GetVoucherByIdPath = '/api/v1/vouchers/{voucherId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getVoucherById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getVoucherById$Response(params: GetVoucherById$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponseVoucherDto>> {
+    return getVoucherById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getVoucherById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getVoucherById(params: GetVoucherById$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
+    return this.getVoucherById$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
     );
   }

@@ -1,0 +1,63 @@
+<div class="card" style="height: 22.5rem;" [ngClass]="{'flipped': isFlipped}">
+    <div class="card-front overflow-scroll" style="width: 18rem;">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="card-title mb-0">{{voucher.title}}</h5>
+                <i *ngIf="voucher.hot === true" class="bi bi-fire" style="color:#ff0000;"></i>
+            </div>
+            <p class="card-text">{{voucher.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{voucher.price}}</span>
+                <i class="bi bi-cash-coin"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{voucher.arrivalDate}}</span>
+                <i class="bi bi-airplane-engines" style="transform: rotate(90deg);"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{voucher.evictionDate}}</span>
+                <i class="bi bi-airplane-engines" style="transform: rotate(-90deg);"></i>
+            </li>
+        </ul>
+        <div class="card-body d-flex justify-content-between">
+            <a *ngIf="!order" (click)="onOrderVoucher()" class="btn btn-dark">{{ 'motion.order' | translate }}</a>
+            <a *ngIf="!manage" (click)="updateVoucher(voucher)" class="btn btn-dark">{{ 'motion.update' | translate }}</a>
+            <i (click)="toggleFlip()" class="bi bi-arrow-90deg-right rotate-icon" style="cursor: pointer;"></i>
+        </div>
+    </div>
+    <div class="card-back overflow-scroll bg-white rounded w-100 h-100">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <i class="bi bi-info"></i>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ 'voucher.tour' | translate }}
+                <span>{{voucher.tourType}}</span>
+                <i class="bi bi-compass"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ 'voucher.transfer' | translate }}
+                <span>{{voucher.transferType}}</span>
+                <i class="bi bi-car-front"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ 'voucher.hotel' | translate }}
+                <span>{{voucher.hotelType}}</span>
+                <i class="bi bi-building"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ 'voucher.active' | translate }}
+                <span *ngIf="voucher.active === true">{{ 'answer.yes' | translate }}</span>
+                <span *ngIf="voucher.active === false">{{ 'answer.no' | translate }}</span>
+                <i class="bi bi-lightning-charge"></i>
+            </li>
+        </ul>
+        <div class="card-body">
+            <i (click)="toggleFlip()" class="bi bi-arrow-90deg-left rotate-icon" style="cursor: pointer;"></i>
+        </div>
+    </div>
+</div>

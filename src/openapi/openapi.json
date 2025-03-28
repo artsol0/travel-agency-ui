@@ -313,6 +313,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Illegal arguments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -444,6 +454,36 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/DataResponseUserDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/vouchers/{voucherId}": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "operationId": "getVoucherById",
+                "parameters": [
+                    {
+                        "name": "voucherId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataResponseVoucherDTO"
                                 }
                             }
                         }
