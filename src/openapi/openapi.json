@@ -790,6 +790,48 @@
                 }
             }
         },
+        "/api/v1/orders/my": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "getCurrentUserOrders",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataResponsePageOrderDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/payment/success": {
             "get": {
                 "tags": [
@@ -1181,6 +1223,9 @@
                     },
                     "status": {
                         "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
                     }
                 },
                 "description": "Response data"

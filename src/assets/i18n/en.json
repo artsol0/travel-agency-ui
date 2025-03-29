@@ -15,7 +15,11 @@
         "delete": "Delete",
         "order": "Order",
         "cancel": "Cancel",
-        "save": "Save"
+        "save": "Save",
+        "pay": "Pay",
+        "ban": "Ban",
+        "unban": "Unban",
+        "increaseBalance": "Increase Balance"
     },
     "question": {
         "notMember": "Not a member?",
@@ -28,7 +32,8 @@
     "menu": {
         "vouchers": "Vouchers",
         "orders": "Orders",
-        "profile": "Profile"
+        "profile": "Profile",
+        "action": "Action"
     },
     "voucher": {
         "title": "Title",
@@ -41,6 +46,15 @@
         "active": "Active",
         "arrivalDate": "Arrival Date",
         "evictionDate": "Eviction Date"
+    },
+    "order": {
+        "createdOn": "Created On",
+        "status": "Status",
+        "statuses": {
+            "registered": "Registered",
+            "canceled": "Canceled",
+            "paid": "Paid"
+        }
     },
     "navigation": {
         "next": "Next",

@@ -30,15 +30,32 @@ export class MenuComponent {
   }
 
   register() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['register']);
   }
 
   login() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
   vocuhers() {
-    this.router.navigate(['/vouchers']);
+    this.router.navigate(['vouchers']);
+  }
+
+  orders() {
+    this.router.navigate(['orders']);
+  }
+
+  profile() {
+    this.router.navigate(['profile']);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
+
+  isLoggedIn():boolean {
+    return localStorage.getItem('token') != null;
   }
 
 }

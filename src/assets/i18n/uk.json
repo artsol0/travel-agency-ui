@@ -15,7 +15,11 @@
         "delete": "Видалити",
         "order": "Замовити",
         "cancel": "Закрити",
-        "save": "Зберегти"
+        "save": "Зберегти",
+        "pay": "Сплатити",
+        "ban": "Забанити",
+        "unban": "Розбанити",
+        "increaseBalance": "Поповнити баланс"
     },
     "question": {
         "notMember": "Ще не зареєстровані?",
@@ -28,7 +32,8 @@
     "menu": {
         "vouchers": "Ваучери",
         "orders": "Замовлення",
-        "profile": "Профіль"
+        "profile": "Профіль",
+        "action": "Дія"
     },
     "voucher": {
         "title": "Назва",
@@ -41,6 +46,15 @@
         "active": "Активний",
         "arrivalDate": "Дата Виїзду",
         "evictionDate": "Дата Повернення"
+    },
+    "order": {
+        "createdOn": "Створено",
+        "status": "Статус",
+        "statuses": {
+            "registered": "Зареєстрований",
+            "canceled": "Закритий",
+            "paid": "Сплачений"
+        }
     },
     "navigation": {
         "next": "Наступне",

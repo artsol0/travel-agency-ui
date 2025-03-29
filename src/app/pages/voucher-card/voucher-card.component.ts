@@ -3,6 +3,7 @@ import { VoucherDto } from '../../services/models';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-voucher-card',
@@ -13,10 +14,9 @@ import { Router } from '@angular/router';
 })
 export class VoucherCardComponent {
 
-  private _manage:boolean = false;
-  private _order:boolean = false;
+  isAdmin: boolean = this.tokenService.getRole() === 'ROLE_ADMIN';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private tokenService: TokenService) {}
 
   isFlipped = false;
 
@@ -35,24 +35,6 @@ export class VoucherCardComponent {
 
   private _voucher: VoucherDto = {}
 
-  get manage():boolean {
-    return this._manage;
-  }
-  
-  @Input()
-  set manage(value: boolean) {
-    this._manage = value;
-  }
-
-  get order():boolean {
-    return this._order;
-  }
-
-  @Input()
-  set order(value: boolean) {
-    this._order = value;
-  }
-
   @Output() private ordered: EventEmitter<VoucherDto> = new EventEmitter<VoucherDto>();
   @Output() private updated: EventEmitter<VoucherDto> = new EventEmitter<VoucherDto>();
 
@@ -66,6 +48,10 @@ export class VoucherCardComponent {
 
   updateVoucher(voucher: VoucherDto) {
     this.router.navigate(['manage', voucher.id]);
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('token') != null;
   }
 
 }

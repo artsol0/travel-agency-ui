@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService, VoucherService } from '../../services/services';
+import { OrderService, UserService, VoucherService } from '../../services/services';
 import { Router } from '@angular/router';
 import { DataResponsePageVoucherDto, VoucherDto } from '../../services/models';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { VoucherCardComponent } from "../voucher-card/voucher-card.component";
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-voucher-list',
@@ -22,16 +23,18 @@ export class VoucherListComponent implements OnInit {
   keyword = undefined;
   message = '';
   level = true;
-  private _manage:boolean = false;
+  isAdmin = false;
 
   constructor(
     private voucherService: VoucherService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.findAllVouchers();
+    this.isAdmin = this.tokenService.getRole() === 'ROLE_ADMIN';
   }
 
   private findAllVouchers() {
@@ -80,10 +83,6 @@ export class VoucherListComponent implements OnInit {
         }
       }
     });
-  }
-
-  get manage():boolean {
-    return this._manage;
   }
 
   goToManage() {

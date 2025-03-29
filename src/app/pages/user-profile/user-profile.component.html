@@ -1,0 +1,33 @@
+<div class="w-100 d-flex justify-content-center">
+    <div 
+        *ngIf="message"
+        class="w-25 alert d-flex alert-dismissible justify-content-between"
+        [class.alert-primary]="level === true"
+        [class.alert-danger]="level === false"
+    >
+        {{ message }}
+        <b class="close" (click)="message = ''" aria-label="close" style="cursor: pointer;">&times;</b>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="profile card p-3 py-4">
+                <div class="text-center mt-3">
+                    <span class="bg-secondary p-1 px-4 rounded text-white">{{ userDto.role }}</span>
+                    <h3 class="mt-2 mb-0">{{ userDto.username }}</h3>
+                    <h5>{{ userDto.email }}</h5>
+                    <h5>{{ userDto.phoneNumber }}</h5>
+                    <h5>{{ userDto.balance }}</h5>
+                    <div *ngIf="!isCurrentUser">
+                        <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="userDto.active">{{ 'motion.ban' | translate }}</button>
+                        <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="!userDto.active">{{ 'motion.unban' | translate }}</button>
+                    </div>
+                    <div *ngIf="isCurrentUser">
+                        <button class="btn btn-dark">{{ 'motion.increaseBalance' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@
  */
 export interface OrderDto {
   createdOn?: string;
+  price?: number;
   status?: string;
   title?: string;
   userId?: string;

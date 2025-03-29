@@ -16,10 +16,9 @@
             [voucher]="voucher"
             (ordered)="orderVoucher($event)"
         >
-            {{voucher.title}}
         </app-voucher-card>
     </div>
-    <div *ngIf="!manage" class="w-100 text-center pt-4">
+    <div *ngIf="isAdmin" class="w-100 text-center pt-4">
         <button (click)="goToManage()" type="button" class="btn btn-dark w-25">+</button>
     </div>
 </div>

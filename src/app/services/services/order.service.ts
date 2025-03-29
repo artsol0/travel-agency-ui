@@ -21,6 +21,8 @@ import { getAllOrders } from '../fn/order/get-all-orders';
 import { GetAllOrders$Params } from '../fn/order/get-all-orders';
 import { getAllOrders1 } from '../fn/order/get-all-orders-1';
 import { GetAllOrders1$Params } from '../fn/order/get-all-orders-1';
+import { getCurrentUserOrders } from '../fn/order/get-current-user-orders';
+import { GetCurrentUserOrders$Params } from '../fn/order/get-current-user-orders';
 import { MessageResponse } from '../models/message-response';
 import { payForOrder } from '../fn/order/pay-for-order';
 import { PayForOrder$Params } from '../fn/order/pay-for-order';
@@ -109,6 +111,31 @@ export class OrderService extends BaseService {
   updateOrderStatus(params: UpdateOrderStatus$Params, context?: HttpContext): Observable<DataResponseOrderDto> {
     return this.updateOrderStatus$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponseOrderDto>): DataResponseOrderDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getCurrentUserOrders()` */
+  static readonly GetCurrentUserOrdersPath = '/api/v1/orders/my';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getCurrentUserOrders()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCurrentUserOrders$Response(params?: GetCurrentUserOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
+    return getCurrentUserOrders(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getCurrentUserOrders$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCurrentUserOrders(params?: GetCurrentUserOrders$Params, context?: HttpContext): Observable<DataResponsePageOrderDto> {
+    return this.getCurrentUserOrders$Response(params, context).pipe(
+      map((r: StrictHttpResponse<DataResponsePageOrderDto>): DataResponsePageOrderDto => r.body)
     );
   }
 

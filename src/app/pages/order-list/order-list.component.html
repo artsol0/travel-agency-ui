@@ -1,0 +1,95 @@
+<div class="w-100 d-flex justify-content-center">
+    <div 
+        *ngIf="message"
+        class="w-25 alert d-flex alert-dismissible justify-content-between"
+        [class.alert-primary]="level === true"
+        [class.alert-danger]="level === false"
+    >
+        {{ message }}
+        <b class="close" (click)="message = ''" aria-label="close" style="cursor: pointer;">&times;</b>
+    </div>
+</div>
+<div class="container mt-2 w-100">
+    <table class="table table-hover">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">{{ 'voucher.title' | translate }}</th>
+            <th scope="col">{{ 'field.username' | translate }}</th>
+            <th scope="col">{{ 'order.createdOn' | translate }}</th>
+            <th scope="col">{{ 'order.status' | translate }}</th>
+            <th scope="col">{{ 'voucher.price' | translate }}</th>
+            <th scope="col">{{ 'menu.action' | translate }}</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orderedVouchers.results?.content; let index = index">
+                <td>{{ index+1 }}</td>
+                <td *ngIf="isAdmin"><a class="link" (click)="goToManage(order.voucherId)">{{ order.title }}</a></td>
+                <td *ngIf="!isAdmin">{{ order.title }}</td>
+                <td *ngIf="isAdmin"><a class="link" (click)="goToUser(order.username)">{{ order.username }}</a></td>
+                <td *ngIf="!isAdmin">{{ order.username }}</td>
+                <td>{{ order.createdOn }}</td>
+                <td>
+                    <select *ngIf="isAdmin" id="status" [(ngModel)]="order.status" class="form-select" aria-label="Order status select" required>
+                        <option selected>{{ 'order.status' | translate }}</option>
+                        <option value="REGISTERED">{{ 'order.statuses.registered' | translate }}</option>
+                        <option value="CANCELED">{{ 'order.statuses.canceled' | translate }}</option>
+                        <option value="PAID">{{ 'order.statuses.paid' | translate }}</option>
+                    </select>
+                    <span *ngIf="!isAdmin">{{ order.status }}</span>
+                </td>
+                <td>{{ order.price }}</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <button *ngIf="!isAdmin" class="btn btn-dark" [class.disabled]="order.status != 'REGISTERED'" (click)="payForOrder(order)"><i class="bi bi-credit-card-fill"></i></button>
+                        <button *ngIf="isAdmin" class="btn btn-dark" (click)="updateOrderStatus(order)"><i class="bi bi-pencil-fill"></i></button>
+                        <button class="btn btn-danger" (click)="deleteOrder(order)"><i class="bi bi-trash-fill"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-4">
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a
+                [class.disabled]="page == 0"
+                (click)="goToPreviousPage()"
+                href="javascript:void(0)" 
+                class="page-link text-dark"
+            >
+                {{ 'navigation.previous' | translate }}
+            </a>
+        </li>
+  
+        <li 
+            class="page-item"
+            *ngFor="let _ of [].constructor(this.orderedVouchers.results?.totalPages); let pageIndex = index"
+        >
+            <a 
+                [class.disabled]="pageIndex == page" 
+                [class.active]="pageIndex == page" 
+                (click)="goToPage(pageIndex)"
+                href="javascript:void(0)" 
+                class="page-link"
+                style="color: #000;"
+            >
+                {{pageIndex + 1}}
+            </a>
+        </li>
+  
+        <li class="page-item">
+            <a 
+                [class.disabled]="isLastPage"
+                (click)="goToNextPage()"
+                href="javascript:void(0)" 
+                class="page-link text-dark"
+            >
+                {{ 'navigation.next' | translate }}
+            </a>
+        </li>
+      </ul>
+    </nav>
+</div>
