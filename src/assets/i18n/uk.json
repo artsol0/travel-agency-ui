@@ -19,7 +19,11 @@
         "pay": "Сплатити",
         "ban": "Забанити",
         "unban": "Розбанити",
-        "increaseBalance": "Поповнити баланс"
+        "increaseBalance": "Поповнити баланс",
+        "filter": "Фільтрувати",
+        "search": "Пошук",
+        "clear": "Очистити",
+        "confirm": "Підтвердити"
     },
     "question": {
         "notMember": "Ще не зареєстровані?",
@@ -59,6 +63,17 @@
     "navigation": {
         "next": "Наступне",
         "previous": "Попереднє",
-        "more": "Більше"
+        "more": "Більше",
+        "or": "або"
+    },
+    "filter": {
+        "minPrice": "Мінімальна Ціна",
+        "maxPrice": "Максимальна Ціна"
+    },
+    "results": {
+        "success": "Успіх",
+        "canceled": "Скасовано",
+        "paymentSuccessful": "Платіж успішно пройшов",
+        "paymentCanceled": "Платіж було скасовано"
     }
 }

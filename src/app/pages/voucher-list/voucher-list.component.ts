@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService, UserService, VoucherService } from '../../services/services';
+import { OrderService, VoucherService } from '../../services/services';
 import { Router } from '@angular/router';
 import { DataResponsePageVoucherDto, VoucherDto } from '../../services/models';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { VoucherCardComponent } from "../voucher-card/voucher-card.component";
 import { TokenService } from '../../services/token/token.service';
+import { GetAllSelectedVouchers$Params } from '../../services/fn/voucher/get-all-selected-vouchers';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-voucher-list',
   standalone: true,
-  imports: [CommonModule, TranslateModule, VoucherCardComponent],
+  imports: [CommonModule, TranslateModule, VoucherCardComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './voucher-list.component.html',
   styleUrl: './voucher-list.component.scss'
 })
@@ -20,10 +22,21 @@ export class VoucherListComponent implements OnInit {
 
   page = 0;
   size = 8;
-  keyword = undefined;
+  keyword = '';
   message = '';
   level = true;
   isAdmin = false;
+  isFiltered = false;
+
+  filterRequest: GetAllSelectedVouchers$Params = {
+    'page': this.page,
+    'size': this.size,
+    'tourType': '',
+    'transferType': '',
+    'hotelType': '',
+    'minPrice': undefined,
+    'maxPrice': undefined
+  }
 
   constructor(
     private voucherService: VoucherService,
@@ -38,6 +51,7 @@ export class VoucherListComponent implements OnInit {
   }
 
   private findAllVouchers() {
+    this.isFiltered = false;
     this.voucherService.getAllVouchersPaged({
       page: this.page,
       size: this.size,
@@ -49,19 +63,51 @@ export class VoucherListComponent implements OnInit {
     })
   }
 
+  private findAllFilteredVouchers() {
+    this.voucherService.getAllSelectedVouchers(this.filterRequest).subscribe({
+      next: (vouchers) => {
+        this.voucherResponse = vouchers;
+      }
+    })
+  }
+
+  searchbyFilter() {
+    this.isFiltered = true;
+    this.page = 0;
+    this.findAllFilteredVouchers();
+  }
+
+  searchByKeyword(keyword: string) {
+    this.page = 0;
+    this.keyword = keyword;
+    this.findAllVouchers();
+  }
+
   goToNextPage() {
     this.page++;
-    this.findAllVouchers();
+    if (this.isFiltered) {
+      this.findAllFilteredVouchers();
+    } else {
+      this.findAllVouchers();
+    }
   }
 
   goToPage(arg0: number) {
     this.page = arg0;
-    this.findAllVouchers();
+    if (this.isFiltered) {
+      this.findAllFilteredVouchers();
+    } else {
+      this.findAllVouchers();
+    }
   }
 
   goToPreviousPage() {
     this.page--;
-    this.findAllVouchers();
+    if (this.isFiltered) {
+      this.findAllFilteredVouchers();
+    } else {
+      this.findAllVouchers();
+    }
   }
 
   get isLastPage(): boolean {
@@ -87,6 +133,23 @@ export class VoucherListComponent implements OnInit {
 
   goToManage() {
     this.router.navigate(['/manage']);
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('token') != null;
+  }
+
+  clearFilter() {
+    this.filterRequest = {
+      'page': this.page,
+      'size': this.size,
+      'tourType': '',
+      'transferType': '',
+      'hotelType': '',
+      'minPrice': undefined,
+      'maxPrice': undefined
+    }
+    this.findAllVouchers();
   }
 
 }

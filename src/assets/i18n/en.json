@@ -19,7 +19,11 @@
         "pay": "Pay",
         "ban": "Ban",
         "unban": "Unban",
-        "increaseBalance": "Increase Balance"
+        "increaseBalance": "Increase Balance",
+        "filter": "Filter",
+        "search": "Search",
+        "clear": "Clear",
+        "confirm": "Confirm"
     },
     "question": {
         "notMember": "Not a member?",
@@ -59,6 +63,17 @@
     "navigation": {
         "next": "Next",
         "previous": "Previous",
-        "more": "More"
+        "more": "More",
+        "or": "or"
+    },
+    "filter": {
+        "minPrice": "Min Price",
+        "maxPrice": "Max Price"
+    },
+    "results": {
+        "success": "Success",
+        "canceled": "Canceled",
+        "paymentSuccessful": "Payment successful",
+        "paymentCanceled": "Payment canceled"
     }
 }

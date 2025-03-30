@@ -18,13 +18,24 @@
                     <h3 class="mt-2 mb-0">{{ userDto.username }}</h3>
                     <h5>{{ userDto.email }}</h5>
                     <h5>{{ userDto.phoneNumber }}</h5>
-                    <h5>{{ userDto.balance }}</h5>
+                    <h5>{{ userDto.balance }}$</h5>
                     <div *ngIf="!isCurrentUser">
                         <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="userDto.active">{{ 'motion.ban' | translate }}</button>
                         <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="!userDto.active">{{ 'motion.unban' | translate }}</button>
                     </div>
                     <div *ngIf="isCurrentUser">
-                        <button class="btn btn-dark">{{ 'motion.increaseBalance' | translate }}</button>
+                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#balanceAmountInput" aria-expanded="false" aria-controls="balanceAmountInput">{{ 'motion.increaseBalance' | translate }}</button>
+                    </div>
+                    <div class="collapse pt-3" id="balanceAmountInput">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <input type="number" [(ngModel)]="amount" name="amount" id="amount" class="form-control" placeholder="{{ 'motion.increaseBalance' | translate }} $">
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-primary" [class.disabled]="amount <= 0 || isConfirmed" style="margin-left: 10%;" (click)="increaseUserBalance()"><i class="bi bi-check-lg"></i></button>
+                                <a class="btn btn-primary" [class.disabled]="!isConfirmed" style="margin-left: 5%;" href="{{paymentUTL}}"><i class="bi bi-credit-card-fill"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

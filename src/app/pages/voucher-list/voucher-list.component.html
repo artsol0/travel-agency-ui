@@ -9,6 +9,83 @@
         <b class="close" (click)="message = ''" aria-label="close" style="cursor: pointer;">&times;</b>
     </div>
 </div>
+
+<div class="container mt-3 w-25">
+    <div class="d-flex justify-content-between">
+        <button *ngIf="isAdmin" (click)="goToManage()" type="button" class="btn btn-dark" style="margin-right: 1%;">+</button>
+        <button class="btn btn-dark rounded-0 rounded-start" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+        aria-expanded="false" aria-controls="selectTourType selectTransferType selectHotelType rangePrice confirmation">
+            <i class="bi bi-filter"></i>
+        </button>
+        <input 
+          #searchkeyword 
+          (keyup)="searchByKeyword(searchkeyword.value)" 
+          type="text" name="keyword" id="keyword" 
+          placeholder="{{ 'voucher.title' | translate }} {{ 'navigation.or' | translate }} {{ 'voucher.description' | translate }}" 
+          class="form-control rounded-0 rounded-end">
+    </div>
+</div>
+
+<div class="container mt-2 w-100">
+  <div class="d-flex justify-content-between">
+    <div class="collapse multi-collapse" id="selectTourType">
+      <select [(ngModel)]="filterRequest.tourType" id="tourType" class="form-select" aria-label="Tour type select">
+        <option value="" selected>{{ 'voucher.tour' | translate }}</option>
+        <option value="HEALTH">Health</option>
+        <option value="SPORTS">Sports</option>
+        <option value="LEISURE">Leisure</option>
+        <option value="SAFARI">Safari</option>
+        <option value="WINE">Wine</option>
+        <option value="ECO">Eco</option>
+        <option value="ADVENTURE">Adventure</option>
+        <option value="CULTURAL">Cultural</option>
+      </select>
+    </div>
+    <div class="collapse multi-collapse" id="selectTransferType">
+      <select [(ngModel)]="filterRequest.transferType" id="transferType" class="form-select" aria-label="Transfer type select">
+        <option value="" selected>{{ 'voucher.transfer' | translate }}</option>
+        <option value="BUS">Bus</option>
+        <option value="TRAIN">Train</option>
+        <option value="PLANE">Plane</option>
+        <option value="SHIP">Ship</option>
+        <option value="PRIVATE_CAR">Private Car</option>
+        <option value="JEEPS">Jeeps</option>
+        <option value="MINIBUS">Minibus</option>
+        <option value="ELECTRICAL_CARS">Electrical Cars</option>
+      </select>
+    </div>
+    <div class="collapse multi-collapse" id="selectHotelType">
+      <select [(ngModel)]="filterRequest.hotelType" id="hotelType" class="form-select" aria-label="Hotel type select">
+        <option value="" selected>{{ 'voucher.hotel' | translate }}</option>
+        <option value="ONE_STAR">One Star</option>
+        <option value="TWO_STARS">Two Stars</option>
+        <option value="THREE_STARS">Three Stars</option>
+        <option value="FOUR_STARS">Four Stars</option>
+        <option value="FIVE_STARS">Five Stars</option>
+      </select>
+    </div>
+    <div class="collapse multi-collapse" id="rangePrice">
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <input [(ngModel)]="filterRequest.minPrice" id="minPrice" type="number" class="form-control" placeholder="{{ 'filter.minPrice' | translate }}" aria-label="Amount (to the nearest dollar)">
+      </div>
+      <div class="input-group pt-1">
+        <span class="input-group-text">$</span>
+        <input [(ngModel)]="filterRequest.maxPrice" id="maxPrice" type="number" class="form-control" placeholder="{{ 'filter.maxPrice' | translate }}" aria-label="Amount (to the nearest dollar)">
+      </div>
+    </div>
+    <div class="collapse multi-collapse" id="confirmation">
+      <div>
+        <button id="filterBtn" [class.disabled]="!isLoggedIn()" (click)="searchbyFilter()" class="btn btn-dark more">{{ 'motion.filter' | translate }}</button>
+      </div>
+      <div class="pt-1">
+        <button id="clearFilterBtn" [class.disabled]="!isLoggedIn() || !isFiltered" (click)="clearFilter()" class="btn btn-dark more w-100">{{ 'motion.clear' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="container mt-2 w-100">
     <div class="d-flex justify-content-center gap-2 flex-wrap">
         <app-voucher-card 
@@ -17,9 +94,6 @@
             (ordered)="orderVoucher($event)"
         >
         </app-voucher-card>
-    </div>
-    <div *ngIf="isAdmin" class="w-100 text-center pt-4">
-        <button (click)="goToManage()" type="button" class="btn btn-dark w-25">+</button>
     </div>
 </div>
 <div class="container mt-4">

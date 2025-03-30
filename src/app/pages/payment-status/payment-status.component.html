@@ -1,0 +1,31 @@
+<div class="w-100 d-flex justify-content-center">
+  <div 
+      *ngIf="message"
+      class="w-25 alert d-flex alert-dismissible justify-content-between"
+      [class.alert-primary]="level === true"
+      [class.alert-danger]="level === false"
+  >
+      {{ message }}
+      <b class="close" (click)="message = ''" aria-label="close" style="cursor: pointer;">&times;</b>
+  </div>
+</div>
+
+<div *ngIf="succeeded" class="text-center">
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+          <i class="checkmark success"><i class="bi bi-patch-check-fill"></i></i>
+        </div>
+          <h1 class="success">{{ 'results.success' | translate }}</h1> 
+          <p>{{ 'results.paymentSuccessful' | translate }}</p>
+    </div>
+</div>
+
+<div *ngIf="!succeeded" class="text-center">
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #faf6f5; margin:0 auto;">
+          <i class="checkmark cancel"><i class="bi bi-x-circle-fill"></i></i>
+        </div>
+          <h1 class="cancel">{{ 'results.canceled' | translate }}</h1> 
+          <p>{{ 'results.paymentCanceled' | translate }}</p>
+    </div>
+</div>
