@@ -7,12 +7,14 @@ import { OrderListComponent } from './pages/order-list/order-list.component';
 import { authGuard } from './services/guard/auth.guard';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { PaymentStatusComponent } from './pages/payment-status/payment-status.component';
+import { AccountActivationComponent } from './pages/account-activation/account-activation.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'vouchers', pathMatch: 'full' },
     { path: 'login', title: 'Trevel Agency - Login', component: LoginComponent },
     { path: 'register', title: 'Trevel Agency - Register', component: RegisterComponent },
     { path: 'vouchers', title: 'Travel Agency - Vouchers', component: VoucherListComponent },
+    { path: 'account/activate', title: 'Travel Agency - Account Activation', component: AccountActivationComponent },
     { path: 'manage', title: 'Travel Agency - Create Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },
     { path: 'manage/:voucherId', title: 'Travel Agency - Update Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },
     { path: 'orders', title: 'Travel Agency - Orders', component: OrderListComponent, canActivate: [authGuard] },

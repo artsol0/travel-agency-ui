@@ -11,6 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { activateUserAccount } from '../fn/user/activate-user-account';
+import { ActivateUserAccount$Params } from '../fn/user/activate-user-account';
 import { changeUserStatusByUsername } from '../fn/user/change-user-status-by-username';
 import { ChangeUserStatusByUsername$Params } from '../fn/user/change-user-status-by-username';
 import { DataResponsePageUserDto } from '../models/data-response-page-user-dto';
@@ -21,6 +23,7 @@ import { getCurrentUser } from '../fn/user/get-current-user';
 import { GetCurrentUser$Params } from '../fn/user/get-current-user';
 import { getUserByUsername } from '../fn/user/get-user-by-username';
 import { GetUserByUsername$Params } from '../fn/user/get-user-by-username';
+import { MessageResponse } from '../models/message-response';
 import { registerUser } from '../fn/user/register-user';
 import { RegisterUser$Params } from '../fn/user/register-user';
 import { updateUser } from '../fn/user/update-user';
@@ -124,6 +127,39 @@ export class UserService extends BaseService {
   changeUserStatusByUsername(params: ChangeUserStatusByUsername$Params, context?: HttpContext): Observable<DataResponseUserDto> {
     return this.changeUserStatusByUsername$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponseUserDto>): DataResponseUserDto => r.body)
+    );
+  }
+
+  /** Path part for operation `activateUserAccount()` */
+  static readonly ActivateUserAccountPath = '/api/v1/users/activate';
+
+  /**
+   * Activate account.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `activateUserAccount()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  activateUserAccount$Response(params: ActivateUserAccount$Params, context?: HttpContext): Observable<StrictHttpResponse<MessageResponse>> {
+    return activateUserAccount(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Activate account.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `activateUserAccount$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  activateUserAccount(params: ActivateUserAccount$Params, context?: HttpContext): Observable<MessageResponse> {
+    return this.activateUserAccount$Response(params, context).pipe(
+      map((r: StrictHttpResponse<MessageResponse>): MessageResponse => r.body)
     );
   }
 

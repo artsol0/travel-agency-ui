@@ -1,0 +1,38 @@
+h1.success {
+    color: #88B04B;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+h1.cancel {
+    color: #b04b4b;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size:20px;
+    margin: 0;
+}
+
+i.success {
+    color: #9ABC66;
+    font-size: 100px;
+    line-height: 200px;
+}
+
+i.cancel {
+    color: #bc6666f6;
+    font-size: 100px;
+    line-height: 200px;
+}
+
+ .card {
+    border: none;
+    background: white;
+    padding: 60px;
+    display: inline-block;
+    margin: 0 auto;
+}
