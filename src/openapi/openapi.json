@@ -1151,7 +1151,6 @@
                 "required": [
                     "email",
                     "password",
-                    "phoneNumber",
                     "username"
                 ],
                 "type": "object",

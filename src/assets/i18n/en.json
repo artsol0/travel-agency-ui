@@ -74,6 +74,17 @@
         "success": "Success",
         "canceled": "Canceled",
         "paymentSuccessful": "Payment successful",
-        "paymentCanceled": "Payment canceled"
+        "paymentCanceled": "Payment canceled",
+        "authSuccessful": "Welcome!",
+        "authFailed": "Google authentication failed",
+        "pageNotFound": "Page not found"
+    },
+    "validation": {
+        "login": "Username and password are mandatory",
+        "username": "Username must contain only characters and numbers",
+        "phoneNumber": "Phone number must contain only numbers",
+        "password": "Password must at least 8 and maximum 30 characters, contain upper and lower case letters and numbers, at least 8 and maximum 30 characters",
+        "email": "Email should be valid",
+        "confirmPassword": "Passwords must be the same"
     }
 }

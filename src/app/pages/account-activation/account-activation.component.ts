@@ -21,7 +21,6 @@ export class AccountActivationComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.token = params.get('token') as string;
     });
-    console.log(this.token);
 
     if (this.token) {
       this.userService.activateUserAccount({

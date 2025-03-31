@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationRequest } from '../../services/models';
 import { AuthenticationService } from '../../services/services';
 import { TokenService } from '../../services/token/token.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +22,20 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private translateService: TranslateService
   ) {}
 
   login() {
     this.errorMessage = [];
+
+    if (!this.authRequest.username || !this.authRequest.password) {
+      this.translateService.get('validation.login').subscribe(translatedMessage => {
+        this.errorMessage = [translatedMessage];
+      });
+      return;
+    }
+
     this.authService.login({
       body: this.authRequest
     }).subscribe({
