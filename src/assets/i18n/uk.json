@@ -23,11 +23,13 @@
         "filter": "Фільтрувати",
         "search": "Пошук",
         "clear": "Очистити",
-        "confirm": "Підтвердити"
+        "confirm": "Підтвердити",
+        "send": "Відправити"
     },
     "question": {
         "notMember": "Ще не зареєстровані?",
-        "alreadyMember": "Вже зареєстровані?"
+        "alreadyMember": "Вже зареєстровані?",
+        "forgotPassword": "Забули пароль?"
     },
     "answer": {
         "yes": "Так",

@@ -492,6 +492,76 @@
                 }
             }
         },
+        "/api/v1/users/reset/password/mail": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "sendResetPasswordMail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/reset/password": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "resetUserPassword",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/vouchers/{voucherId}": {
             "get": {
                 "tags": [
@@ -1146,6 +1216,19 @@
                     }
                 },
                 "description": "Generic data response"
+            },
+            "ResetPasswordRequest": {
+                "required": [
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "maxLength": 30,
+                        "minLength": 8,
+                        "type": "string"
+                    }
+                }
             },
             "UserDTO": {
                 "required": [

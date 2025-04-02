@@ -48,9 +48,6 @@ export class RegisterComponent {
           balance: undefined
         }
 
-        console.log(this.registerRequest.phoneNumber);
-        console.log(this.registerRequest.balance);
-
         this.userSerivce.registerUser({
           body: this.registerRequest
         }).subscribe({

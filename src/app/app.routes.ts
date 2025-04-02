@@ -10,6 +10,7 @@ import { PaymentStatusComponent } from './pages/payment-status/payment-status.co
 import { AccountActivationComponent } from './pages/account-activation/account-activation.component';
 import { LoginStatusComponent } from './pages/login-status/login-status.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'vouchers', pathMatch: 'full' },
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'register', title: 'Trevel Agency - Register', component: RegisterComponent },
     { path: 'vouchers', title: 'Travel Agency - Vouchers', component: VoucherListComponent },
     { path: 'account/activate', title: 'Travel Agency - Account Activation', component: AccountActivationComponent },
+    { path: 'password/reset', title: 'Travel Agency - Reset Password', component: ResetPasswordComponent },
     { path: 'login/oauth2/status', title: 'Travel Agency - Login Status', component: LoginStatusComponent },
     { path: 'manage', title: 'Travel Agency - Create Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },
     { path: 'manage/:voucherId', title: 'Travel Agency - Update Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },

@@ -23,11 +23,13 @@
         "filter": "Filter",
         "search": "Search",
         "clear": "Clear",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "send": "Send"
     },
     "question": {
         "notMember": "Not a member?",
-        "alreadyMember": "Already a member?"
+        "alreadyMember": "Already a member?",
+        "forgotPassword": "Forgot your password?"
     },
     "answer": {
         "yes": "Yes",

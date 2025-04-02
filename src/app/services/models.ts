@@ -18,6 +18,7 @@ export { PageableObject } from './models/pageable-object';
 export { PageOrderDto } from './models/page-order-dto';
 export { PageUserDto } from './models/page-user-dto';
 export { PageVoucherDto } from './models/page-voucher-dto';
+export { ResetPasswordRequest } from './models/reset-password-request';
 export { SortObject } from './models/sort-object';
 export { StripeResponse } from './models/stripe-response';
 export { UserDto } from './models/user-dto';
