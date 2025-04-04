@@ -24,7 +24,8 @@
         "search": "Search",
         "clear": "Clear",
         "confirm": "Confirm",
-        "send": "Send"
+        "send": "Send",
+        "continueWithGoogle": "Continue with Google"
     },
     "question": {
         "notMember": "Not a member?",
@@ -82,10 +83,12 @@
         "pageNotFound": "Page not found"
     },
     "validation": {
+        "username-login": "Username is mandatory",
+        "password-login": "Password is mandatory",
         "login": "Username and password are mandatory",
         "username": "Username must contain only characters and numbers",
         "phoneNumber": "Phone number must contain only numbers",
-        "password": "Password must at least 8 and maximum 30 characters, contain upper and lower case letters and numbers, at least 8 and maximum 30 characters",
+        "password": "Password must at least 8 and maximum 30 characters, contain upper and lower case letters, number and special",
         "email": "Email should be valid",
         "confirmPassword": "Passwords must be the same"
     }

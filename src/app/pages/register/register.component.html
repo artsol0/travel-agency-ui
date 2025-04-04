@@ -1,8 +1,8 @@
 <div class="container mt-4 w-50">
-    <form [formGroup]="registrationForm" (ngSubmit)="register()">
+    <form [formGroup]="registrationForm" class="needs-validation" (ngSubmit)="register()" novalidate>
         <div class="d-flex justify-content-between">
-            <div class="mt-2 form-group">
-                <label for="username">{{ 'field.username' | translate }}</label>
+            <div class="mt-2 form-group w-50 me-2">
+                <label for="username">{{ 'field.username' | translate }}*</label>
                 <input 
                 formControlName="username" 
                 class="form-control" 
@@ -12,35 +12,11 @@
                 placeholder="username12" 
                 required
                 [class.is-invalid]="registrationForm.controls.username.invalid && registrationForm.controls.username.touched">
+                <div class="invalid-feedback">
+                    {{ 'validation.username' | translate }}
+                </div>  
             </div>
-            <div class="mt-2 form-group">
-                <label for="email">{{ 'field.email' | translate }}</label>
-                <input 
-                formControlName="email" 
-                class="form-control" 
-                type="email" 
-                name="email" 
-                id="email" 
-                required 
-                placeholder="myemail@gmail.com"
-                [class.is-invalid]="registrationForm.controls.email.invalid && registrationForm.controls.email.touched">
-            </div>
-            <div class="mt-2 form-group">
-                <label for="password">{{ 'field.password' | translate }}</label>
-                <input 
-                formControlName="password" 
-                class="form-control" 
-                type="password" 
-                name="password"
-                id="password" 
-                placeholder="Pas$worD" 
-                required 
-                [class.is-invalid]="registrationForm.controls.password.invalid && registrationForm.controls.password.touched">
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <div class="mt-2 form-group">
+            <div class="mt-2 form-group w-50">
                 <label for="phoneNumber">{{ 'field.phoneNumber' | translate }}</label>
                 <input 
                 formControlName="phoneNumber" 
@@ -50,8 +26,29 @@
                 name="phoneNumber" 
                 placeholder="089438237" 
                 [class.is-invalid]="registrationForm.controls.phoneNumber.invalid">
+                <div class="invalid-feedback">
+                    {{ 'validation.phoneNumber' | translate }}
+                </div>  
             </div>
-            <div class="mt-2 form-group">
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <div class="mt-2 form-group w-50 me-2">
+                <label for="password">{{ 'field.password' | translate }}*</label>
+                <input 
+                formControlName="password" 
+                class="form-control" 
+                type="password" 
+                name="password"
+                id="password" 
+                placeholder="Pas$worD" 
+                required 
+                [class.is-invalid]="registrationForm.controls.password.invalid && registrationForm.controls.password.touched">
+                <div class="invalid-feedback">
+                    {{ 'validation.password' | translate }}
+                </div>  
+            </div>
+            <div class="mt-2 form-group w-50">
                 <label for="confirmPassword">{{ 'field.confirmPassword' | translate }}</label>
                 <input 
                 formControlName="confirmPassword" 
@@ -62,15 +59,34 @@
                 placeholder="Pas$worD"
                 required
                 [class.is-invalid]="registrationForm.controls.confirmPassword.invalid && registrationForm.controls.confirmPassword.touched">
+                <div class="invalid-feedback">
+                    {{ 'validation.confirmPassword' | translate }}
+                </div>  
             </div>
+        </div>
+
+        <div class="mt-2 form-group w-50">
+            <label for="email">{{ 'field.email' | translate }}*</label>
+            <input 
+            formControlName="email" 
+            class="form-control" 
+            type="email" 
+            name="email" 
+            id="email" 
+            required 
+            placeholder="myemail@gmail.com"
+            [class.is-invalid]="registrationForm.controls.email.invalid && registrationForm.controls.email.touched">
+            <div class="invalid-feedback">
+                {{ 'validation.email' | translate }}
+            </div>  
         </div>
 
         <div class="mt-2 d-flex justify-content-between">
             <p>{{ 'question.alreadyMember' | translate }} <a class="primary" style="cursor: pointer;" (click)="login()">{{ 'motion.login' | translate }}</a></p>
-            <button class="btn btn-dark" type="submit">{{ 'motion.signUp' | translate }}</button>
+            <button class="btn btn-dark" type="submit" [class.disabled]="registrationForm.invalid || !clickable">{{ 'motion.signUp' | translate }}</button>
         </div>
 
-        <div *ngFor="let msg of errorMessage" class="w-100 mt-2 text-danger text-center">{{msg}}</div>
-        <div *ngFor="let msg of successMessage" class="w-100 mt-2 text-primary text-center">{{msg}}</div>
+        <div *ngIf="errorMessage" class="w-100 mt-2 text-danger text-center">{{errorMessage}}</div>
+        <div *ngIf="successMessage" class="w-100 mt-2 text-primary text-center">{{successMessage}}</div>
     </form>
 </div>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../services/services';
 import { ActivatedRoute } from '@angular/router';
 import { ResetPasswordRequest } from '../../services/models';
@@ -17,8 +17,8 @@ export class ResetPasswordComponent implements OnInit {
 
   token: string = '';
   resetPasswordRequest: ResetPasswordRequest = {'password': ''};
-  errorMessage: Array<string> = [];
-  successMessage: Array<string> = [];
+  errorMessage: string = '';
+  successMessage: string = '';
 
   resetPasswordForm = new FormGroup({
     password: new FormControl("",[Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$')]),
@@ -27,8 +27,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
-    private translateService: TranslateService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -38,11 +37,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetPassword() {
-    this.errorMessage = [];
-    this.successMessage = [];
+    this.errorMessage = '';
+    this.successMessage = '';
     if (this.resetPasswordForm.valid && this.resetPasswordForm.dirty) {
       if (this.comparePasswords(this.resetPasswordForm.value.password as string, this.resetPasswordForm.value.confirmPassword as string)) {
-
         this.resetPasswordRequest.password = this.resetPasswordForm.value.password as string;
 
         this.userService.resetUserPassword({
@@ -50,29 +48,18 @@ export class ResetPasswordComponent implements OnInit {
           'token': this.token
         }).subscribe({
           next: (res) => {
-            this.successMessage.push(res.statusMessage as string);
+            this.successMessage = res.statusMessage as string;
             localStorage.setItem('token', this.token);
           },
           error: (err) => {
             if (err.error.statusMessage) {
-              this.errorMessage.push(err.error.statusMessage);
+              this.errorMessage = err.error.statusMessage;
             }
           }
         })
-      
-      
       } else {
-        this.translateService.get('validation.confirmPassword').subscribe(translatedMessage => {
-          this.errorMessage = [translatedMessage];
-        });
-        return;
-      }
-    } else {
-      if (this.resetPasswordForm.controls.password.invalid) {
-        this.translateService.get('validation.password').subscribe(translatedMessage => {
-          this.errorMessage = [translatedMessage];
-        });
-        return;
+        this.resetPasswordForm.controls.confirmPassword.reset();
+        this.resetPasswordForm.controls.confirmPassword.markAsTouched();
       }
     }
   }

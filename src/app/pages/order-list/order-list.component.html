@@ -42,7 +42,7 @@
                     <div class="d-flex gap-2">
                         <button *ngIf="!isAdmin" class="btn btn-dark" [class.disabled]="order.status != 'REGISTERED'" (click)="payForOrder(order)"><i class="bi bi-credit-card-fill"></i></button>
                         <button *ngIf="isAdmin" class="btn btn-dark" (click)="updateOrderStatus(order)"><i class="bi bi-pencil-fill"></i></button>
-                        <button class="btn btn-danger" (click)="deleteOrder(order)"><i class="bi bi-trash-fill"></i></button>
+                        <!-- <button class="btn btn-danger" (click)="deleteOrder(order)"><i class="bi bi-trash-fill"></i></button> -->
                     </div>
                 </td>
             </tr>

@@ -1,5 +1,5 @@
 <div class="container mt-4 w-50">
-    <form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+    <form #loginForm="ngForm" class="needs-validation" (ngSubmit)="login()" novalidate>
         <div class="mt-2 form-group">
             <label for="username">{{ 'field.username' | translate }}</label>
             <input 
@@ -10,7 +10,11 @@
             name="username" 
             placeholder="user2132" 
             #username="ngModel" 
-            [class.is-invalid]="username.invalid && username.touched" required>
+            required
+            [class.is-invalid]="username.invalid && username.touched">
+            <div class="invalid-feedback">
+                {{ 'validation.username-login' | translate }}
+            </div>  
         </div>
         <div class="mt-2 form-group">
             <label for="password">{{ 'field.password' | translate }}</label>
@@ -21,41 +25,71 @@
             id="password" 
             name="password" 
             placeholder="12345" 
-            required #password="ngModel" 
+            required 
+            #password="ngModel" 
             [class.is-invalid]="password.invalid && password.touched">
+            <div class="invalid-feedback">
+                {{ 'validation.password-login' | translate }}
+            </div>        
         </div>
 
         <div class="mt-2 d-flex justify-content-between">
             <a class="google-btn" href="http://localhost:8080/oauth2/authorization/google">
                 <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
-                 <span>Continue with Google</span>
+                 <span>{{ 'motion.continueWithGoogle' | translate }}</span>
             </a>
-            <a data-bs-toggle="collapse" href="#emailField" aria-expanded="false" aria-controls="emailFielde" class="text-center">{{ 'question.forgotPassword' | translate }}</a>
+            <a 
+            data-bs-toggle="collapse" 
+            href="#emailField" 
+            aria-expanded="false" 
+            aria-controls="emailFielde" 
+            class="text-center">
+                {{ 'question.forgotPassword' | translate }}
+            </a>
         </div>
 
         <div class="mt-2 d-flex justify-content-between">
             <p>{{ 'question.notMember' | translate }} <a class="primary" style="cursor: pointer;" (click)="register()">{{ 'motion.signUp' | translate }}</a></p>
-            <button type="submit" class="btn btn-dark" [class.disabled]="!clickable">{{ 'motion.login' | translate }}</button>
+            <button 
+            type="submit" 
+            class="btn btn-dark"
+            [class.disabled]="!loginForm.valid || !clickable">
+                {{ 'motion.login' | translate }}
+            </button>
         </div>
 
-        <div *ngFor="let msg of errorMessage" class="w-100 mt-2 text-danger text-center">{{msg}}</div>
-        <div *ngFor="let msg of successMessage" class="w-100 mt-2 text-primary text-center">{{msg}}</div>
+        <div *ngIf="errorMessage" class="w-100 mt-2 text-danger text-center">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="w-100 mt-2 text-primary text-center">{{ successMessage }}</div>
     </form>
 
     <div class="mt-2 form-group collapse" id="emailField">
-        <div class="d-flex justify-content-between">
-            <input 
-            class="form-control" 
-            [(ngModel)]="resetEmail" 
-            style="margin-right: 1%;" 
-            type="email" 
-            id="email" 
-            name="email" 
-            #email="ngModel" 
-            placeholder="{{ 'field.email' | translate }}" 
-            required 
-            [class.is-invalid]="email.invalid && email.touched">
-            <button type="submit" [class.disabled]="!clickable" (click)="sendResetPasswordEmail()" class="btn btn-dark">{{ 'motion.send' | translate }}</button>
+        <div class="d-flex justify-content-center">
+            <div class="me-2 w-50">
+                <input 
+                class="form-control" 
+                [(ngModel)]="resetEmail" 
+                style="margin-right: 1%;" 
+                type="email" 
+                id="email" 
+                name="email" 
+                email
+                #email="ngModel" 
+                placeholder="{{ 'field.email' | translate }}" 
+                required 
+                [class.is-invalid]="email.invalid && email.touched">
+                <div class="invalid-feedback">
+                    {{ 'validation.email' | translate }}
+                </div>   
+            </div>
+            <div>
+                <button 
+                type="submit" 
+                [class.disabled]="!email.valid || !clickable" 
+                (click)="sendResetPasswordEmail()" 
+                class="btn btn-dark">
+                    {{ 'motion.send' | translate }}
+                </button>
+            </div>
         </div>
     </div>
 </div>
