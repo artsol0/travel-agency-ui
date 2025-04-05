@@ -121,5 +121,39 @@ export class ManageVoucherComponent implements OnInit {
     const [day, month, year] = date.split('-');
     return `${year}-${month}-${day}`;
   }
+
+  changeHotStatus() {
+    this.voucherService.changeVoucherHotStatusByVoucherId({
+      'voucherId': this.voucherRequest.id as string
+    }).subscribe({
+      next: (res) => {
+        this.level = true;
+        this.message = res.statusMessage as string;
+      },
+      error: (err) => {
+        if (err.error.statusMessage) {
+          this.level = false;
+          this.message = err.error.statusMessage;
+        }
+      }
+    })
+  }
+
+  changeActiveStatus() {
+    this.voucherService.changeVoucherActiveStatusByVoucherId({
+      'voucherId': this.voucherRequest.id as string
+    }).subscribe({
+      next: (res) => {
+        this.level = true;
+        this.message = res.statusMessage as string;
+      },
+      error: (err) => {
+        if (err.error.statusMessage) {
+          this.level = false;
+          this.message = err.error.statusMessage;
+        }
+      }
+    });
+  }
   
 }

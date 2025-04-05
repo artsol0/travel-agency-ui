@@ -56,8 +56,8 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  goToManage(voucherId: string|undefined) {
-    this.router.navigate(['manage', voucherId]);
+  goToVoucher(voucherId: string|undefined) {
+    this.router.navigate(['voucher', voucherId]);
   }
 
   goToUser(username: string|undefined) {

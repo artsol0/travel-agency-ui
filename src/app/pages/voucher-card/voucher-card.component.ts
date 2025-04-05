@@ -54,4 +54,17 @@ export class VoucherCardComponent {
     return localStorage.getItem('token') != null;
   }
 
+  getHotelStars(hotelType?: string): number[] {
+    const starsMap: Record<string, number> = {
+      ONE_STAR: 1,
+      TWO_STARS: 2,
+      THREE_STARS: 3,
+      FOUR_STARS: 4,
+      FIVE_STARS: 5,
+    };
+  
+    const stars = starsMap[hotelType ?? ''] || 0;
+    return Array(stars).fill(0);
+  }
+
 }

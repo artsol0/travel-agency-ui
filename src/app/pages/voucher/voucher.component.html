@@ -1,1 +1,41 @@
-<p>voucher works!</p>
+<div class="container mt-2 w-50">
+    <div class="row">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2 class="mb-3">{{voucher.title}}</h2>
+                <div class="mb-3">
+                    <span class="h4 me-2">${{voucher.price}}</span>
+                </div>
+                <div class="mb-3">
+                    <ng-container *ngFor="let _ of getHotelStars(voucher.hotelType)">
+                      <i class="bi bi-star-fill text-warning"></i>
+                    </ng-container>
+                </div>
+                <p class="mb-4">{{voucher.description}}</p>
+            </div>
+            <div>
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-compass me-2"></i>
+                        <span>{{voucher.tourType}}</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-car-front me-2"></i>
+                        <span>{{voucher.transferType}}</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-airplane-engines me-2" style="transform: rotate(90deg);"></i>
+                        <span>{{voucher.arrivalDate}}</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-airplane-engines me-2" style="transform: rotate(-90deg);"></i>
+                        <span>{{voucher.evictionDate}}</span>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-danger" (click)="orders()">{{ 'motion.cancel' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

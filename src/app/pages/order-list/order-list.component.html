@@ -23,8 +23,7 @@
         <tbody>
             <tr *ngFor="let order of orderedVouchers.results?.content; let index = index">
                 <td>{{ index+1 }}</td>
-                <td *ngIf="isAdmin"><a class="link" (click)="goToManage(order.voucherId)">{{ order.title }}</a></td>
-                <td *ngIf="!isAdmin">{{ order.title }}</td>
+                <td><a class="link" (click)="goToVoucher(order.voucherId)">{{ order.title }}</a></td>
                 <td *ngIf="isAdmin"><a class="link" (click)="goToUser(order.username)">{{ order.username }}</a></td>
                 <td *ngIf="!isAdmin">{{ order.username }}</td>
                 <td>{{ order.createdOn }}</td>

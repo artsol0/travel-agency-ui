@@ -429,6 +429,70 @@
                 }
             }
         },
+        "/api/v1/vouchers/change/{voucherId}/active": {
+            "patch": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Voucher active status update",
+                "description": "Updates the active status of a voucher by its id.",
+                "operationId": "changeVoucherActiveStatusByVoucherId",
+                "parameters": [
+                    {
+                        "name": "voucherId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataResponseVoucherDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/vouchers/snapshot/{snapshotId}": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Voucher specific snapshot return",
+                "description": "Returns a specific voucher snapshot.",
+                "operationId": "getVoucherSnapshotById",
+                "parameters": [
+                    {
+                        "name": "snapshotId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataResponseVoucherDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/users/change/{userId}/status": {
             "patch": {
                 "tags": [

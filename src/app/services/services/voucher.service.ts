@@ -11,6 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { changeVoucherActiveStatusByVoucherId } from '../fn/voucher/change-voucher-active-status-by-voucher-id';
+import { ChangeVoucherActiveStatusByVoucherId$Params } from '../fn/voucher/change-voucher-active-status-by-voucher-id';
 import { changeVoucherHotStatusByVoucherId } from '../fn/voucher/change-voucher-hot-status-by-voucher-id';
 import { ChangeVoucherHotStatusByVoucherId$Params } from '../fn/voucher/change-voucher-hot-status-by-voucher-id';
 import { createNewVoucher } from '../fn/voucher/create-new-voucher';
@@ -28,6 +30,8 @@ import { getAllVouchersPaged } from '../fn/voucher/get-all-vouchers-paged';
 import { GetAllVouchersPaged$Params } from '../fn/voucher/get-all-vouchers-paged';
 import { getVoucherById } from '../fn/voucher/get-voucher-by-id';
 import { GetVoucherById$Params } from '../fn/voucher/get-voucher-by-id';
+import { getVoucherSnapshotById } from '../fn/voucher/get-voucher-snapshot-by-id';
+import { GetVoucherSnapshotById$Params } from '../fn/voucher/get-voucher-snapshot-by-id';
 import { MessageResponse } from '../models/message-response';
 import { updateVoucherByVoucherId } from '../fn/voucher/update-voucher-by-voucher-id';
 import { UpdateVoucherByVoucherId$Params } from '../fn/voucher/update-voucher-by-voucher-id';
@@ -129,6 +133,72 @@ export class VoucherService extends BaseService {
    */
   changeVoucherHotStatusByVoucherId(params: ChangeVoucherHotStatusByVoucherId$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
     return this.changeVoucherHotStatusByVoucherId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
+    );
+  }
+
+  /** Path part for operation `changeVoucherActiveStatusByVoucherId()` */
+  static readonly ChangeVoucherActiveStatusByVoucherIdPath = '/api/v1/vouchers/change/{voucherId}/active';
+
+  /**
+   * Voucher active status update.
+   *
+   * Updates the active status of a voucher by its id.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `changeVoucherActiveStatusByVoucherId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeVoucherActiveStatusByVoucherId$Response(params: ChangeVoucherActiveStatusByVoucherId$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponseVoucherDto>> {
+    return changeVoucherActiveStatusByVoucherId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Voucher active status update.
+   *
+   * Updates the active status of a voucher by its id.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `changeVoucherActiveStatusByVoucherId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeVoucherActiveStatusByVoucherId(params: ChangeVoucherActiveStatusByVoucherId$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
+    return this.changeVoucherActiveStatusByVoucherId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getVoucherSnapshotById()` */
+  static readonly GetVoucherSnapshotByIdPath = '/api/v1/vouchers/snapshot/{snapshotId}';
+
+  /**
+   * Voucher specific snapshot return.
+   *
+   * Returns a specific voucher snapshot.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getVoucherSnapshotById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getVoucherSnapshotById$Response(params: GetVoucherSnapshotById$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponseVoucherDto>> {
+    return getVoucherSnapshotById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Voucher specific snapshot return.
+   *
+   * Returns a specific voucher snapshot.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getVoucherSnapshotById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getVoucherSnapshotById(params: GetVoucherSnapshotById$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
+    return this.getVoucherSnapshotById$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
     );
   }

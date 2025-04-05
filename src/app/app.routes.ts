@@ -11,6 +11,7 @@ import { AccountActivationComponent } from './pages/account-activation/account-a
 import { LoginStatusComponent } from './pages/login-status/login-status.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { VoucherComponent } from './pages/voucher/voucher.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'vouchers', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'account/activate', title: 'Travel Agency - Account Activation', component: AccountActivationComponent },
     { path: 'password/reset', title: 'Travel Agency - Reset Password', component: ResetPasswordComponent },
     { path: 'login/oauth2/status', title: 'Travel Agency - Login Status', component: LoginStatusComponent },
+    { path: 'voucher/:voucherId', title: 'Travel Agency - Voucher', component: VoucherComponent, canActivate: [authGuard] },
     { path: 'manage', title: 'Travel Agency - Create Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },
     { path: 'manage/:voucherId', title: 'Travel Agency - Update Voucher', component: ManageVoucherComponent, canActivate: [authGuard] },
     { path: 'orders', title: 'Travel Agency - Orders', component: OrderListComponent, canActivate: [authGuard] },
