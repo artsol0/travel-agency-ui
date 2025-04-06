@@ -20,13 +20,13 @@ export class VoucherListComponent implements OnInit {
 
   voucherResponse: DataResponsePageVoucherDto = {};
 
-  page = 0;
-  size = 8;
-  keyword = '';
-  message = '';
-  level = true;
-  isAdmin = false;
-  isFiltered = false;
+  page:number = 0;
+  size:number = 8;
+  keyword:string = '';
+  message:string = '';
+  level:boolean = true;
+  isAdmin:boolean = false;
+  isFiltered:boolean = false;
 
   filterRequest: GetAllSelectedVouchers$Params = {
     'page': this.page,

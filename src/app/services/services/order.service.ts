@@ -17,10 +17,12 @@ import { DataResponseOrderDto } from '../models/data-response-order-dto';
 import { DataResponsePageOrderDto } from '../models/data-response-page-order-dto';
 import { deleteOrder } from '../fn/order/delete-order';
 import { DeleteOrder$Params } from '../fn/order/delete-order';
+import { generateOrderedVoucherPdf } from '../fn/order/generate-ordered-voucher-pdf';
+import { GenerateOrderedVoucherPdf$Params } from '../fn/order/generate-ordered-voucher-pdf';
 import { getAllOrders } from '../fn/order/get-all-orders';
 import { GetAllOrders$Params } from '../fn/order/get-all-orders';
-import { getAllOrders1 } from '../fn/order/get-all-orders-1';
-import { GetAllOrders1$Params } from '../fn/order/get-all-orders-1';
+import { getAllUserOrders } from '../fn/order/get-all-user-orders';
+import { GetAllUserOrders$Params } from '../fn/order/get-all-user-orders';
 import { getCurrentUserOrders } from '../fn/order/get-current-user-orders';
 import { GetCurrentUserOrders$Params } from '../fn/order/get-current-user-orders';
 import { MessageResponse } from '../models/message-response';
@@ -139,8 +141,33 @@ export class OrderService extends BaseService {
     );
   }
 
+  /** Path part for operation `getAllUserOrders()` */
+  static readonly GetAllUserOrdersPath = '/api/v1/orders/{userId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllUserOrders()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllUserOrders$Response(params: GetAllUserOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
+    return getAllUserOrders(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllUserOrders$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllUserOrders(params: GetAllUserOrders$Params, context?: HttpContext): Observable<DataResponsePageOrderDto> {
+    return this.getAllUserOrders$Response(params, context).pipe(
+      map((r: StrictHttpResponse<DataResponsePageOrderDto>): DataResponsePageOrderDto => r.body)
+    );
+  }
+
   /** Path part for operation `getAllOrders()` */
-  static readonly GetAllOrdersPath = '/api/v1/orders/{userId}';
+  static readonly GetAllOrdersPath = '/api/v1/orders/all';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -148,7 +175,7 @@ export class OrderService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllOrders$Response(params: GetAllOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
+  getAllOrders$Response(params?: GetAllOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
     return getAllOrders(this.http, this.rootUrl, params, context);
   }
 
@@ -158,34 +185,34 @@ export class OrderService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllOrders(params: GetAllOrders$Params, context?: HttpContext): Observable<DataResponsePageOrderDto> {
+  getAllOrders(params?: GetAllOrders$Params, context?: HttpContext): Observable<DataResponsePageOrderDto> {
     return this.getAllOrders$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponsePageOrderDto>): DataResponsePageOrderDto => r.body)
     );
   }
 
-  /** Path part for operation `getAllOrders1()` */
-  static readonly GetAllOrders1Path = '/api/v1/orders/all';
+  /** Path part for operation `generateOrderedVoucherPdf()` */
+  static readonly GenerateOrderedVoucherPdfPath = '/api/v1/orders/download/{voucherId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getAllOrders1()` instead.
+   * To access only the response body, use `generateOrderedVoucherPdf()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getAllOrders1$Response(params?: GetAllOrders1$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
-    return getAllOrders1(this.http, this.rootUrl, params, context);
+  generateOrderedVoucherPdf$Response(params: GenerateOrderedVoucherPdf$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
+    return generateOrderedVoucherPdf(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getAllOrders1$Response()` instead.
+   * To access the full response (for headers, for example), `generateOrderedVoucherPdf$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getAllOrders1(params?: GetAllOrders1$Params, context?: HttpContext): Observable<DataResponsePageOrderDto> {
-    return this.getAllOrders1$Response(params, context).pipe(
-      map((r: StrictHttpResponse<DataResponsePageOrderDto>): DataResponsePageOrderDto => r.body)
+  generateOrderedVoucherPdf(params: GenerateOrderedVoucherPdf$Params, context?: HttpContext): Observable<Blob> {
+    return this.generateOrderedVoucherPdf$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Blob>): Blob => r.body)
     );
   }
 

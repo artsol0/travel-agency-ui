@@ -21,8 +21,8 @@ export class UserProfileComponent implements OnInit {
   amount:number = 0;
   isConfirmed:boolean = false;
   paymentUTL:string = '';
-  isCurrent: boolean = false;
-  role: string = '';
+  isCurrent:boolean = false;
+  role:string = '';
 
   constructor(
     private activatedRout: ActivatedRoute, 

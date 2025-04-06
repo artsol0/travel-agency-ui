@@ -1062,7 +1062,7 @@
                 "tags": [
                     "Order"
                 ],
-                "operationId": "getAllOrders",
+                "operationId": "getAllUserOrders",
                 "parameters": [
                     {
                         "name": "page",
@@ -1112,7 +1112,7 @@
                 "tags": [
                     "Order"
                 ],
-                "operationId": "getAllOrders_1",
+                "operationId": "getAllOrders",
                 "parameters": [
                     {
                         "name": "page",
@@ -1133,6 +1133,15 @@
                             "format": "int32",
                             "default": 10
                         }
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -1142,6 +1151,37 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/DataResponsePageOrderDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/orders/download/{voucherId}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "generateOrderedVoucherPDF",
+                "parameters": [
+                    {
+                        "name": "voucherId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
                                 }
                             }
                         }

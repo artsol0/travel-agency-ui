@@ -12,7 +12,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class MenuComponent {
 
-  lang: string = '';
+  lang:string = '';
 
   constructor(
     private router: Router,

@@ -9,7 +9,19 @@
         <b class="close" (click)="message = ''" aria-label="close" style="cursor: pointer;">&times;</b>
     </div>
 </div>
-<div class="container mt-2 w-100">
+<div *ngIf="!isUser" class="container mt-4">
+    <div class="d-flex justify-content-center">
+        <input 
+        [(ngModel)]="keyword"
+        type="text" 
+        name="keyword" 
+        id="keyword" 
+        placeholder="{{ 'voucher.title' | translate }} {{ 'navigation.or' | translate }} {{ 'field.username' | translate }}" 
+        class="form-control w-25 me-2">
+        <button class="btn btn-dark" (click)="findAllOrders()">{{ 'motion.search' | translate }}</button>
+    </div>
+</div>
+<div class="container mt-4 w-100">
     <table class="table table-hover">
         <thead>
             <th scope="col">#</th>
@@ -39,8 +51,8 @@
                 <td>
                     <div class="d-flex gap-2">
                         <button *ngIf="isUser" class="btn btn-dark" [class.disabled]="order.status != 'REGISTERED'" (click)="payForOrder(order)"><i class="bi bi-credit-card-fill"></i></button>
+                        <button *ngIf="isUser" class="btn btn-dark" [class.disabled]="order.status != 'PAID'" (click)="makeVoucherPDF(order)"><i class="bi bi-download"></i></button>
                         <button *ngIf="!isUser" class="btn btn-dark" (click)="updateOrderStatus(order)"><i class="bi bi-pencil-fill"></i></button>
-                        <!-- <button class="btn btn-danger" (click)="deleteOrder(order)"><i class="bi bi-trash-fill"></i></button> -->
                     </div>
                 </td>
             </tr>

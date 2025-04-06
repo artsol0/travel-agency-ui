@@ -17,8 +17,9 @@ import { TokenService } from '../../services/token/token.service';
 export class OrderListComponent implements OnInit {
 
   orderedVouchers: DataResponsePageOrderDto = {};
-  page = 0;
-  size = 10;
+  page:number = 0;
+  size:number = 10;
+  keyword:string = '';
   message:string = '';
   level:boolean = true;
   isUser:boolean = false;
@@ -46,9 +47,10 @@ export class OrderListComponent implements OnInit {
   }
 
   findAllOrders() {
-    this.orderService.getAllOrders1({
+    this.orderService.getAllOrders({
       page: this.page,
-      size: this.size
+      size: this.size,
+      keyword: this.keyword
     }).subscribe({
       next: (res) => {
         this.orderedVouchers = res;
@@ -117,6 +119,22 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  makeVoucherPDF(order: OrderDto) {
+    this.orderService.generateOrderedVoucherPdf({
+      'voucherId': order.voucherId as string
+    }).subscribe({
+      next: (res: Blob) => {
+        const blob = new Blob([res], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = order.username + '_Voucher.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url); 
+      }
+    });
+  }
+
   updateOrderStatus(order: OrderDto) {
     this.orderService.updateOrderStatus({
       'voucherId': order.voucherId as string,
@@ -131,25 +149,6 @@ export class OrderListComponent implements OnInit {
           if (updatedOrder) {
             updatedOrder.status = res.results?.status;
           }
-        }
-      },
-      error: (err) => {
-        this.level = err.error.succeeded;
-        this.message = err.error.statusMessage;
-      }
-    })
-  }
-
-  deleteOrder(order: OrderDto) {
-    this.orderService.deleteOrder({
-      'voucherId': order.voucherId as string,
-      'userId': order.userId as string
-    }).subscribe({
-      next: (res) => {
-        this.level = res.succeeded as boolean;
-        this.message = res.statusMessage as string;
-        if (this.orderedVouchers.results?.content) {
-          this.orderedVouchers.results.content = this.orderedVouchers.results.content.filter(o => !(o.voucherId === order.voucherId && o.userId === order.userId));
         }
       },
       error: (err) => {

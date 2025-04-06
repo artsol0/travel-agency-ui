@@ -14,7 +14,7 @@ import { TokenService } from '../../services/token/token.service';
 })
 export class VoucherCardComponent {
 
-  role: string = this.tokenService.getRole();
+  role:string = this.tokenService.getRole();
 
   constructor(private router: Router, private tokenService: TokenService) {}
 

@@ -10,16 +10,18 @@ import { RequestBuilder } from '../../request-builder';
 
 import { DataResponsePageOrderDto } from '../../models/data-response-page-order-dto';
 
-export interface GetAllOrders1$Params {
+export interface GetAllUserOrders$Params {
   page?: number;
   size?: number;
+  userId: string;
 }
 
-export function getAllOrders1(http: HttpClient, rootUrl: string, params?: GetAllOrders1$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
-  const rb = new RequestBuilder(rootUrl, getAllOrders1.PATH, 'get');
+export function getAllUserOrders(http: HttpClient, rootUrl: string, params: GetAllUserOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
+  const rb = new RequestBuilder(rootUrl, getAllUserOrders.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
     rb.query('size', params.size, {});
+    rb.path('userId', params.userId, {});
   }
 
   return http.request(
@@ -32,4 +34,4 @@ export function getAllOrders1(http: HttpClient, rootUrl: string, params?: GetAll
   );
 }
 
-getAllOrders1.PATH = '/api/v1/orders/all';
+getAllUserOrders.PATH = '/api/v1/orders/{userId}';

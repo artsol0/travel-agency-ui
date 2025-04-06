@@ -15,10 +15,10 @@ import { ResetPasswordRequest } from '../../services/models';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  token: string = '';
-  resetPasswordRequest: ResetPasswordRequest = {'password': ''};
-  errorMessage: string = '';
-  successMessage: string = '';
+  token:string = '';
+  resetPasswordRequest:ResetPasswordRequest = {'password': ''};
+  errorMessage:string = '';
+  successMessage:string = '';
 
   resetPasswordForm = new FormGroup({
     password: new FormControl("",[Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$')]),

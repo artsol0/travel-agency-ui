@@ -13,15 +13,15 @@ import { DataResponsePageOrderDto } from '../../models/data-response-page-order-
 export interface GetAllOrders$Params {
   page?: number;
   size?: number;
-  userId: string;
+  keyword?: string;
 }
 
-export function getAllOrders(http: HttpClient, rootUrl: string, params: GetAllOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
+export function getAllOrders(http: HttpClient, rootUrl: string, params?: GetAllOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<DataResponsePageOrderDto>> {
   const rb = new RequestBuilder(rootUrl, getAllOrders.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
     rb.query('size', params.size, {});
-    rb.path('userId', params.userId, {});
+    rb.query('keyword', params.keyword, {});
   }
 
   return http.request(
@@ -34,4 +34,4 @@ export function getAllOrders(http: HttpClient, rootUrl: string, params: GetAllOr
   );
 }
 
-getAllOrders.PATH = '/api/v1/orders/{userId}';
+getAllOrders.PATH = '/api/v1/orders/all';

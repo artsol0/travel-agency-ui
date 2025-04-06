@@ -13,10 +13,10 @@ import { PaymentService } from '../../services/services';
 })
 export class PaymentStatusComponent implements OnInit {
 
-  succeeded: boolean = false;
-  sessionId: string = '';
-  message: string = '';
-  level: boolean = true;
+  succeeded:boolean = false;
+  sessionId:string = '';
+  message:string = '';
+  level:boolean = true;
 
   ngOnInit(): void {
     this.succeeded = this.router.url.includes('success');

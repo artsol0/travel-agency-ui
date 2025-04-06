@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AccountActivationComponent implements OnInit {
 
-  succeeded: boolean = false;
+  succeeded:boolean = false;
   token:string = '';
   result:string = '';
 

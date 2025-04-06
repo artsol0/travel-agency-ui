@@ -16,10 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LoginComponent {
 
-  authRequest: AuthenticationRequest = {username: '', password: ''};
-  resetEmail: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
+  authRequest:AuthenticationRequest = {username: '', password: ''};
+  resetEmail:string = '';
+  errorMessage:string = '';
+  successMessage:string = '';
 
   clickable: boolean = true;
 

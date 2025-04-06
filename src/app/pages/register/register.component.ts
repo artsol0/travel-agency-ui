@@ -15,7 +15,7 @@ import { UserService } from '../../services/services';
 })
 export class RegisterComponent {
 
-  clickable: boolean = true;
+  clickable:boolean = true;
 
   constructor (
     private router: Router,
