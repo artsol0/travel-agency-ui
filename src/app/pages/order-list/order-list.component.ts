@@ -19,18 +19,18 @@ export class OrderListComponent implements OnInit {
   orderedVouchers: DataResponsePageOrderDto = {};
   page = 0;
   size = 10;
-  message = '';
-  level = true;
-  isAdmin: boolean = false;
+  message:string = '';
+  level:boolean = true;
+  isUser:boolean = false;
 
   constructor(private router: Router, private orderService: OrderService, private tokenService: TokenService) {}
 
   ngOnInit(): void {
-    this.isAdmin = this.tokenService.getRole() === 'ROLE_ADMIN';
-    if (this.isAdmin) {
-      this.findAllOrders();
-    } else {
+    this.isUser = this.tokenService.getRole() === 'ROLE_USER';
+    if (this.isUser) {
       this.findCurrentUserOrders();
+    } else {
+      this.findAllOrders();
     }
   }
 
@@ -66,28 +66,28 @@ export class OrderListComponent implements OnInit {
 
   goToNextPage() {
     this.page++;
-    if (this.isAdmin) {
-      this.findAllOrders();
-    } else {
+    if (this.isUser) {
       this.findCurrentUserOrders();
+    } else {
+      this.findAllOrders();
     }
   }
 
   goToPage(arg0: number) {
     this.page = arg0;
-    if (this.isAdmin) {
-      this.findAllOrders();
-    } else {
+    if (this.isUser) {
       this.findCurrentUserOrders();
+    } else {
+      this.findAllOrders();
     }
   }
 
   goToPreviousPage() {
     this.page--;
-    if (this.isAdmin) {
-      this.findAllOrders();
-    } else {
+    if (this.isUser) {
       this.findCurrentUserOrders();
+    } else {
+      this.findAllOrders();
     }
   }
 

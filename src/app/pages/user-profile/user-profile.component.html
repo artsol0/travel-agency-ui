@@ -19,11 +19,11 @@
                     <h5>{{ userDto.email }}</h5>
                     <h5>{{ userDto.phoneNumber }}</h5>
                     <h5>{{ userDto.balance }}$</h5>
-                    <div *ngIf="!isCurrentUser">
+                    <div *ngIf="role === 'ROLE_ADMIN' && !isCurrent">
                         <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="userDto.active">{{ 'motion.ban' | translate }}</button>
                         <button class="btn btn-danger" (click)="changeUserStatus(userDto)" *ngIf="!userDto.active">{{ 'motion.unban' | translate }}</button>
                     </div>
-                    <div *ngIf="isCurrentUser">
+                    <div *ngIf="role === 'ROLE_USER'">
                         <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#balanceAmountInput" aria-expanded="false" aria-controls="balanceAmountInput">{{ 'motion.increaseBalance' | translate }}</button>
                     </div>
                     <div class="collapse pt-3" id="balanceAmountInput">

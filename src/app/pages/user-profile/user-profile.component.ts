@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDto } from '../../services/models';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PaymentService, UserService } from '../../services/services';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,21 +16,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class UserProfileComponent implements OnInit {
 
-  isCurrentUser = false;
-  message = '';
-  level = true;
-  amount = 0;
-  isConfirmed = false;
+  message:string = '';
+  level:boolean = true;
+  amount:number = 0;
+  isConfirmed:boolean = false;
   paymentUTL:string = '';
+  isCurrent: boolean = false;
+  role: string = '';
 
   constructor(
-    private router: Router, 
     private activatedRout: ActivatedRoute, 
     private userService: UserService, 
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
+    this.role = this.tokenService.getRole();
     const username = this.activatedRout.snapshot.params['username'];
     if (username) {
       this.userService.getUserByUsername({
@@ -42,11 +45,11 @@ export class UserProfileComponent implements OnInit {
         }
       });
     } else {
-      this.isCurrentUser = true;
       this.userService.getCurrentUser().subscribe({
         next: (user) => {
           if (user.results) {
             this.userDto = user.results;
+            this.isCurrent = true;
           }
         }
       });

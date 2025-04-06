@@ -14,7 +14,7 @@ import { TokenService } from '../../services/token/token.service';
 })
 export class VoucherCardComponent {
 
-  isAdmin: boolean = this.tokenService.getRole() === 'ROLE_ADMIN';
+  role: string = this.tokenService.getRole();
 
   constructor(private router: Router, private tokenService: TokenService) {}
 

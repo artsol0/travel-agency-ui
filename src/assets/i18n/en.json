@@ -90,6 +90,14 @@
         "phoneNumber": "Phone number must contain only numbers",
         "password": "Password must at least 8 and maximum 30 characters, contain upper and lower case letters, number and special",
         "email": "Email should be valid",
-        "confirmPassword": "Passwords must be the same"
+        "confirmPassword": "Passwords must be the same",
+        "title": "Title is mandatory and cannot contain more than 100 characters",
+        "description": "Description is mandatory and cannot contain more than 1000 characters",
+        "price": "Price is mandatory cannot be less than 0",
+        "tourType": "Tour type is mandatory",
+        "transferType": "Transfer type is mandatory",
+        "hotelType": "Hotel type is mandatory",
+        "arrivalDate": "Arrival date is mandatory and cannot be after eviction date",
+        "evictionDate": "Eviction date is mandatory and cannot be before arrival date"
     }
 }

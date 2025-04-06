@@ -22,8 +22,8 @@
             </li>
         </ul>
         <div class="card-body d-flex justify-content-between">
-            <a *ngIf="!isAdmin" [class.disabled]="!isLoggedIn()" (click)="onOrderVoucher()" class="btn btn-dark">{{ 'motion.order' | translate }}</a>
-            <a *ngIf="isAdmin" (click)="updateVoucher(voucher)" class="btn btn-dark">{{ 'motion.update' | translate }}</a>
+            <a *ngIf="role === 'ROLE_USER' || role === ''" [class.disabled]="!isLoggedIn()" (click)="onOrderVoucher()" class="btn btn-dark">{{ 'motion.order' | translate }}</a>
+            <a *ngIf="role === 'ROLE_ADMIN' || role === 'ROLE_MANAGER'" (click)="updateVoucher(voucher)" class="btn btn-dark">{{ 'motion.update' | translate }}</a>
             <i (click)="toggleFlip()" class="bi bi-arrow-90deg-right rotate-icon" style="cursor: pointer;"></i>
         </div>
     </div>

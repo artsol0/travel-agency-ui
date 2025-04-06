@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { VoucherDto } from '../../services/models';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoucherService } from '../../services/services';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-manage-voucher',
@@ -16,12 +17,25 @@ import { VoucherService } from '../../services/services';
 export class ManageVoucherComponent implements OnInit {
 
   update:boolean = false;
+  isAdmin: boolean = this.tokenSerivce.getRole() === 'ROLE_ADMIN';
 
   constructor(
     private voucherService: VoucherService,
     private router: Router,
-    private activatedRout: ActivatedRoute
+    private activatedRout: ActivatedRoute,
+    private tokenSerivce: TokenService
   ) {}
+
+  addVoucherForm = new FormGroup({
+    title: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.pattern('^[a-zA-Z0-9 ]+$')]),
+    description: new FormControl("", [Validators.required, Validators.maxLength(1000)]),
+    price: new FormControl("", [Validators.required, Validators.min(0), Validators.pattern('^[0-9.]+$')]),
+    tourType: new FormControl("", [Validators.required]),
+    transferType: new FormControl("", [Validators.required]),
+    hotelType: new FormControl("", [Validators.required]),
+    arrivalDate: new FormControl("", [Validators.required]),
+    evictionDate: new FormControl("", [Validators.required])
+  });
 
   ngOnInit(): void {
     const voucherId = this.activatedRout.snapshot.params['voucherId'];
@@ -123,37 +137,41 @@ export class ManageVoucherComponent implements OnInit {
   }
 
   changeHotStatus() {
-    this.voucherService.changeVoucherHotStatusByVoucherId({
-      'voucherId': this.voucherRequest.id as string
-    }).subscribe({
-      next: (res) => {
-        this.level = true;
-        this.message = res.statusMessage as string;
-      },
-      error: (err) => {
-        if (err.error.statusMessage) {
-          this.level = false;
-          this.message = err.error.statusMessage;
+    if (this.update) {
+      this.voucherService.changeVoucherHotStatusByVoucherId({
+        'voucherId': this.voucherRequest.id as string
+      }).subscribe({
+        next: (res) => {
+          this.level = true;
+          this.message = res.statusMessage as string;
+        },
+        error: (err) => {
+          if (err.error.statusMessage) {
+            this.level = false;
+            this.message = err.error.statusMessage;
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   changeActiveStatus() {
-    this.voucherService.changeVoucherActiveStatusByVoucherId({
-      'voucherId': this.voucherRequest.id as string
-    }).subscribe({
-      next: (res) => {
-        this.level = true;
-        this.message = res.statusMessage as string;
-      },
-      error: (err) => {
-        if (err.error.statusMessage) {
-          this.level = false;
-          this.message = err.error.statusMessage;
+    if (this.update) {
+      this.voucherService.changeVoucherActiveStatusByVoucherId({
+        'voucherId': this.voucherRequest.id as string
+      }).subscribe({
+        next: (res) => {
+          this.level = true;
+          this.message = res.statusMessage as string;
+        },
+        error: (err) => {
+          if (err.error.statusMessage) {
+            this.level = false;
+            this.message = err.error.statusMessage;
+          }
         }
-      }
-    });
+      });
+    }
   }
   
 }

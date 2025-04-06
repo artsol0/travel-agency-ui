@@ -11,72 +11,168 @@
 </div>
 <div class="container mt-4 w-50">
     <div>
-        <div class="d-flex justify-content-between">
-            <div class="mt-2 form-group" style="width: 49.5%;">
-                <input [(ngModel)]="voucherRequest.title" class="form-control" type="text" id="title" placeholder="{{ 'voucher.title' | translate }}" required>
+        <form [formGroup]="addVoucherForm" class="needs-validation" novalidate>
+            <div class="d-flex justify-content-between">
+                <div class="mt-2 form-group" style="width: 49.5%;">
+                    <input 
+                    formControlName="title"
+                    [(ngModel)]="voucherRequest.title" 
+                    class="form-control" 
+                    type="text" 
+                    id="title" 
+                    name="title"
+                    required
+                    placeholder="{{ 'voucher.title' | translate }}"
+                    [class.is-invalid]="addVoucherForm.controls.title.invalid && addVoucherForm.controls.title.touched">
+                    <div class="invalid-feedback">
+                        {{ 'validation.title' | translate }}
+                    </div>  
+                </div>
+                
+                <div class="mt-2 form-group" style="width: 49.5%;">
+                    <input 
+                    formControlName="price"
+                    [(ngModel)]="voucherRequest.price" 
+                    class="form-control" 
+                    type="number" 
+                    id="price" 
+                    name="price"
+                    placeholder="{{ 'voucher.price' | translate }}"
+                    required
+                    [class.is-invalid]="addVoucherForm.controls.price.invalid && addVoucherForm.controls.price.touched">
+                    <div class="invalid-feedback">
+                        {{ 'validation.price' | translate }}
+                    </div>  
+                </div>
             </div>
-            
-            <div class="mt-2 form-group" style="width: 49.5%;">
-                <input [(ngModel)]="voucherRequest.price" class="form-control" type="number" id="price" placeholder="{{ 'voucher.price' | translate }}" required>
-            </div>
-        </div>
 
-        <div class="mt-2 form-group">
-            <textarea [(ngModel)]="voucherRequest.description" rows="4" class="form-control" id="description" placeholder="{{ 'voucher.description' | translate }}" required></textarea>
-        </div>
+            <div class="mt-2 form-group">
+                <textarea 
+                formControlName="description"
+                [(ngModel)]="voucherRequest.description" 
+                rows="4" 
+                class="form-control"
+                id="description" 
+                name="description"
+                placeholder="{{ 'voucher.description' | translate }}" 
+                required
+                [class.is-invalid]="addVoucherForm.controls.description.invalid && addVoucherForm.controls.description.touched">
+                </textarea>
+                <div class="invalid-feedback">
+                    {{ 'validation.description' | translate }}
+                </div>  
+            </div>
 
-        <div class="d-flex justify-content-between">
-            <div class="mt-2 form-group" style="width: 33%;">
-                <select [(ngModel)]="voucherRequest.tourType" id="tourType" class="form-select" aria-label="Tour type select" required>
-                    <option selected>{{ 'voucher.tour' | translate }}</option>
-                    <option value="HEALTH">Health</option>
-                    <option value="SPORTS">Sports</option>
-                    <option value="LEISURE">Leisure</option>
-                    <option value="SAFARI">Safari</option>
-                    <option value="WINE">Wine</option>
-                    <option value="ECO">Eco</option>
-                    <option value="ADVENTURE">Adventure</option>
-                    <option value="CULTURAL">Cultural</option>
-                </select>
+            <div class="d-flex justify-content-between">
+                <div class="mt-2 form-group" style="width: 33%;">
+                    <select 
+                    formControlName="tourType"
+                    [(ngModel)]="voucherRequest.tourType" 
+                    id="tourType" 
+                    name="tourType"
+                    class="form-select" 
+                    aria-label="Tour type select"
+                    required
+                    [class.is-invalid]="addVoucherForm.controls.tourType.invalid && addVoucherForm.controls.tourType.touched">
+                        <option selected>{{ 'voucher.tour' | translate }}</option>
+                        <option value="HEALTH">Health</option>
+                        <option value="SPORTS">Sports</option>
+                        <option value="LEISURE">Leisure</option>
+                        <option value="SAFARI">Safari</option>
+                        <option value="WINE">Wine</option>
+                        <option value="ECO">Eco</option>
+                        <option value="ADVENTURE">Adventure</option>
+                        <option value="CULTURAL">Cultural</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{ 'validation.tourType' | translate }}
+                    </div>
+                </div>
+        
+                <div class="mt-2 form-group" style="width: 33%;">
+                    <select 
+                    formControlName="transferType"
+                    [(ngModel)]="voucherRequest.transferType" 
+                    id="transferType" 
+                    name="transferType"
+                    class="form-select" 
+                    aria-label="Transfer type select" 
+                    required
+                    [class.is-invalid]="addVoucherForm.controls.transferType.invalid && addVoucherForm.controls.transferType.touched">
+                        <option selected>{{ 'voucher.transfer' | translate }}</option>
+                        <option value="BUS">Bus</option>
+                        <option value="TRAIN">Train</option>
+                        <option value="PLANE">Plane</option>
+                        <option value="SHIP">Ship</option>
+                        <option value="PRIVATE_CAR">Private Car</option>
+                        <option value="JEEPS">Jeeps</option>
+                        <option value="MINIBUS">Minibus</option>
+                        <option value="ELECTRICAL_CARS">Electrical Cars</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{ 'validation.transferType' | translate }}
+                    </div>
+                </div>
+        
+                <div class="mt-2 form-group" style="width: 33%;">
+                    <select 
+                    formControlName="hotelType"
+                    [(ngModel)]="voucherRequest.hotelType" 
+                    id="hotelType" 
+                    name="hotelType"
+                    class="form-select" 
+                    aria-label="Hotel type select" 
+                    required
+                    [class.is-invalid]="addVoucherForm.controls.hotelType.invalid && addVoucherForm.controls.hotelType.touched">
+                        <option selected>{{ 'voucher.hotel' | translate }}</option>
+                        <option value="ONE_STAR">One Star</option>
+                        <option value="TWO_STARS">Two Stars</option>
+                        <option value="THREE_STARS">Three Stars</option>
+                        <option value="FOUR_STARS">Four Stars</option>
+                        <option value="FIVE_STARS">Five Stars</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{ 'validation.hotelType' | translate }}
+                    </div>
+                </div>
             </div>
-    
-            <div class="mt-2 form-group" style="width: 33%;">
-                <select [(ngModel)]="voucherRequest.transferType" id="transferType" class="form-select" aria-label="Transfer type select" required>
-                    <option selected>{{ 'voucher.transfer' | translate }}</option>
-                    <option value="BUS">Bus</option>
-                    <option value="TRAIN">Train</option>
-                    <option value="PLANE">Plane</option>
-                    <option value="SHIP">Ship</option>
-                    <option value="PRIVATE_CAR">Private Car</option>
-                    <option value="JEEPS">Jeeps</option>
-                    <option value="MINIBUS">Minibus</option>
-                    <option value="ELECTRICAL_CARS">Electrical Cars</option>
-                </select>
-            </div>
-    
-            <div class="mt-2 form-group" style="width: 33%;">
-                <select [(ngModel)]="voucherRequest.hotelType" id="hotelType" class="form-select" aria-label="Hotel type select" required>
-                    <option selected>{{ 'voucher.hotel' | translate }}</option>
-                    <option value="ONE_STAR">One Star</option>
-                    <option value="TWO_STARS">Two Stars</option>
-                    <option value="THREE_STARS">Three Stars</option>
-                    <option value="FOUR_STARS">Four Stars</option>
-                    <option value="FIVE_STARS">Five Stars</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="d-flex justify-content-between">
-            <div class="mt-2 form-group" style="width: 49.5%;">
-                <label for="arrivalDate">{{ 'voucher.arrivalDate' | translate }}</label>
-                <input [(ngModel)]="voucherRequest.arrivalDate" id="arrivalDate" class="form-control" value="dd-mm-yyyy" type="date" required />
+            <div class="d-flex justify-content-between">
+                <div class="mt-2 form-group" style="width: 49.5%;">
+                    <label for="arrivalDate">{{ 'voucher.arrivalDate' | translate }}</label>
+                    <input 
+                    formControlName="arrivalDate"
+                    [(ngModel)]="voucherRequest.arrivalDate" 
+                    id="arrivalDate" 
+                    name="arrivalDate"
+                    class="form-control" 
+                    value="dd-mm-yyyy" 
+                    type="date" 
+                    required 
+                    [class.is-invalid]="addVoucherForm.controls.arrivalDate.invalid && addVoucherForm.controls.arrivalDate.touched"/>
+                    <div class="invalid-feedback">
+                        {{ 'validation.arrivalDate' | translate }}
+                    </div>
+                </div>
+        
+                <div class="mt-2 form-group" style="width: 49.5%;">
+                    <label for="evictionDate">{{ 'voucher.evictionDate' | translate }}</label>
+                    <input 
+                    formControlName="evictionDate"
+                    [(ngModel)]="voucherRequest.evictionDate"
+                    id="evictionDate" 
+                    name="evictionDate"
+                    class="form-control" 
+                    value="dd-mm-yyyy" 
+                    type="date" 
+                    required 
+                    [class.is-invalid]="addVoucherForm.controls.evictionDate.invalid && addVoucherForm.controls.evictionDate.touched"/>
+                    <div class="invalid-feedback">
+                        {{ 'validation.evictionDate' | translate }}
+                    </div>
+                </div>
             </div>
-    
-            <div class="mt-2 form-group" style="width: 49.5%;">
-                <label for="evictionDate">{{ 'voucher.evictionDate' | translate }}</label>
-                <input [(ngModel)]="voucherRequest.evictionDate" id="evictionDate" class="form-control" value="dd-mm-yyyy" type="date" required />
-            </div>
-        </div>
+        </form>
 
         <div class="mt-2 form-group">
             <div class="form-check form-check-inline">
@@ -90,8 +186,8 @@
         </div>
 
         <div class="mt-2" style="text-align: right;">
-            <button *ngIf="!update" class="btn btn-dark" (click)="createVoucher()" style="margin-right: 1%;">{{ 'motion.create' | translate }}</button>
-            <button *ngIf="update" class="btn btn-dark" (click)="updateVoucher()" style="margin-right: 1%;">{{ 'motion.update' | translate }}</button>
+            <button *ngIf="!update" class="btn btn-dark" [class.disabled]="addVoucherForm.invalid || !isAdmin" (click)="createVoucher()" style="margin-right: 1%;">{{ 'motion.create' | translate }}</button>
+            <button *ngIf="update" class="btn btn-dark" [class.disabled]="addVoucherForm.invalid || !isAdmin" (click)="updateVoucher()" style="margin-right: 1%;">{{ 'motion.update' | translate }}</button>
             <button class="btn btn-danger" (click)="vouchers()">{{ 'motion.cancel' | translate }}</button>
         </div>
     </div>
