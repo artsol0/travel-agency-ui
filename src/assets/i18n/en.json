@@ -80,7 +80,9 @@
         "paymentCanceled": "Payment canceled",
         "authSuccessful": "Welcome!",
         "authFailed": "Google authentication failed",
-        "pageNotFound": "Page not found"
+        "pageNotFound": "Page not found",
+        "expired": "Expired",
+        "valid": "Valid"
     },
     "validation": {
         "username-login": "Username is mandatory",

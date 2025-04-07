@@ -493,6 +493,36 @@
                 }
             }
         },
+        "/api/v1/vouchers/check": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "operationId": "checkVoucherExpire",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/users/change/{userId}/status": {
             "patch": {
                 "tags": [

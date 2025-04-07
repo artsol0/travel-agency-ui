@@ -1,0 +1,19 @@
+<div *ngIf="succeeded" class="text-center">
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+          <i class="checkmark success"><i class="bi bi-patch-check-fill"></i></i>
+        </div>
+          <h1 class="success">{{ 'results.valid' | translate }}</h1> 
+          <p>{{ message }}</p>
+    </div>
+</div>
+
+<div *ngIf="!succeeded" class="text-center">
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #faf6f5; margin:0 auto;">
+          <i class="checkmark cancel"><i class="bi bi-x-circle-fill"></i></i>
+        </div>
+          <h1 class="cancel">{{ 'results.expired' | translate }}</h1> 
+          <p>{{ message }}</p>
+    </div>
+</div>

@@ -15,6 +15,8 @@ import { changeVoucherActiveStatusByVoucherId } from '../fn/voucher/change-vouch
 import { ChangeVoucherActiveStatusByVoucherId$Params } from '../fn/voucher/change-voucher-active-status-by-voucher-id';
 import { changeVoucherHotStatusByVoucherId } from '../fn/voucher/change-voucher-hot-status-by-voucher-id';
 import { ChangeVoucherHotStatusByVoucherId$Params } from '../fn/voucher/change-voucher-hot-status-by-voucher-id';
+import { checkVoucherExpire } from '../fn/voucher/check-voucher-expire';
+import { CheckVoucherExpire$Params } from '../fn/voucher/check-voucher-expire';
 import { createNewVoucher } from '../fn/voucher/create-new-voucher';
 import { CreateNewVoucher$Params } from '../fn/voucher/create-new-voucher';
 import { DataResponseListVoucherDto } from '../models/data-response-list-voucher-dto';
@@ -200,6 +202,31 @@ export class VoucherService extends BaseService {
   getVoucherSnapshotById(params: GetVoucherSnapshotById$Params, context?: HttpContext): Observable<DataResponseVoucherDto> {
     return this.getVoucherSnapshotById$Response(params, context).pipe(
       map((r: StrictHttpResponse<DataResponseVoucherDto>): DataResponseVoucherDto => r.body)
+    );
+  }
+
+  /** Path part for operation `checkVoucherExpire()` */
+  static readonly CheckVoucherExpirePath = '/api/v1/vouchers/check';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `checkVoucherExpire()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkVoucherExpire$Response(params: CheckVoucherExpire$Params, context?: HttpContext): Observable<StrictHttpResponse<MessageResponse>> {
+    return checkVoucherExpire(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `checkVoucherExpire$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkVoucherExpire(params: CheckVoucherExpire$Params, context?: HttpContext): Observable<MessageResponse> {
+    return this.checkVoucherExpire$Response(params, context).pipe(
+      map((r: StrictHttpResponse<MessageResponse>): MessageResponse => r.body)
     );
   }
 

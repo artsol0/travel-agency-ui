@@ -80,7 +80,9 @@
         "paymentCanceled": "Платіж було скасовано",
         "authSuccessful": "Ласкаво просимо!",
         "authFailed": "Невдача аутентифікація з Google",
-        "pageNotFound": "Сторінку не знайдено"
+        "pageNotFound": "Сторінку не знайдено",
+        "expired": "Недійсний",
+        "valid": "Дійсний"
     },
     "validation": {
         "username-login": "Ім'я користувача обов'язкове",
